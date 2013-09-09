@@ -6,7 +6,7 @@ if (Meteor.isClient) {
   Template.container.rendered = function () {
      
     container = $(this.find("#container"));
-  
+
   }
 
   Template.block.rendered = function () {
@@ -19,9 +19,7 @@ if (Meteor.isClient) {
       
       container.isotope({
         itemSelector : '.item',
-        layoutMode : 'masonry',
          masonry: {
-          columnWidth: 30,
           cornerStampSelector: '.corner-stamp'
         },
         getSortData : {
@@ -34,8 +32,12 @@ if (Meteor.isClient) {
       container.isotope({sortBy: "number"});
     } else if (container.hasClass("isotope")) {
       console.log("Updating isotope");
-      container.isotope('insert', $(this.find(".item:not(.isotope-item)")));
+      container.isotope('addItems', $(this.find(".item:not(.isotope-item)")), function() {
+                container.isotope();
+            });
     }
+
+    
   }
 
   Template.filter.events = {
@@ -43,18 +45,7 @@ if (Meteor.isClient) {
       /*var text = $("#text")[0].value;
         Session.set("search", text);*/
 
-       $('input#text').quicksearch('#container .item', {
-        'show': function() {
-            $(this).addClass('quicksearch-match');
-        },
-        'hide': function() {
-            $(this).removeClass('quicksearch-match');
-        }
-    }).keyup(function(){
-        setTimeout( function() {
-            container.isotope({ filter: '.quicksearch-match' }).isotope(); 
-        }, 100 );
-    });
+      keypress();
     }
   }
 
@@ -66,6 +57,26 @@ if (Meteor.isClient) {
     }*/
     return Blocks.find();
   };
+  
+  Template.block.events({
+  'click .add': function (event) {
+    var blockname = event.currentTarget.parentElement.parentElement.parentElement.children["value"].innerText;
+    var value = event.currentTarget.parentElement.children["textTag"].value;
+
+    
+    if(text != ""){   
+     Meteor.call('updateblock', blockname, value , function(err,response) {
+      if(err) {
+        Session.set('serverDataResponse', "Error:" + err.reason);
+        return;
+      }
+      Session.set('serverDataResponse', response);
+    });
+    }
+ 
+  }
+  
+}); 
 
   Template.block.destroyed = function () {
     console.log("Running destroy for block " + this.data.num);
@@ -74,37 +85,28 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-  function getRandomInt (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  function rejigger() {
-    var count = Blocks.find().count();
-    var i = getRandomInt(0, count-1);
-    var num = getRandomInt(0,100);
-    var item = Blocks.find().fetch()[i];
-    var c = getRandomInt(0,2);
-
-    if (count > 30) c++;
-
-    if (c==0) {
-      // Add
-      console.log("Add");
-      Blocks.insert({num: num});
-    } else if (c==1) {
-      // Remove
-      console.log("Remove");
-      if (item) {
-        Blocks.remove(item._id);
+   Meteor.startup(function () {
+    Meteor.methods({
+      updateblock: function (blockname, value) {
+       Blocks.update({ num: blockname }, { $push: { tags: value } });
       }
-    } else if (c>=2) {
-      // Fiddle
-      console.log("Fiddle");
-      if (item) {
-        Blocks.update(item._id, {num: num});
-      }
-    }
-  }
-
-  
+    });
+  });
 }
+
+function keypress(){
+   $('input#text').quicksearch('#container .item', {
+        'show': function() {
+            $(this).addClass('quicksearch-match');
+        },
+        'hide': function() {
+            $(this).removeClass('quicksearch-match');
+        }
+    }).keyup(function(){
+        setTimeout( function() {
+            container.isotope({ filter: '.quicksearch-match' }).isotope(); 
+        }, 100 );
+    });
+
+}
+  

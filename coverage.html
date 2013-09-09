@@ -23,11 +23,23 @@
 </template>
 
 <template name="block">
-	<div class="item block">
-		<div>
+	<div value={{num}} class="item block">
+		<div id="value">
 			{{num}}
 		</div>
-		<img class="image" src="{{img}}">
+		<div>
+			<img class="image" src="{{img}}">
+		</div>
+		<div>
+			Tags: {{tags}}
+			
+			<div class="addnewtag">			
+				<input id="textTag" type="text" placeholder="Add Tag"/>
+				<button type="button" class="add">+</button>
+			</div>
+		</div>
+		</div>
+
 	</div>
 
 </template>

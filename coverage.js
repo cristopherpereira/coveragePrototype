@@ -44,11 +44,8 @@ if (Meteor.isClient) {
   }
 
   Template.filter.events = {
-    'keypress  input#text': function (event) {
-      /*var text = $("#text")[0].value;
-        Session.set("search", text);*/
-
-      keypress();
+    'keypress  input#textfilter': function (event) {
+         keypress();
     }
   }
 
@@ -98,7 +95,7 @@ if (Meteor.isServer) {
 }
 
 function keypress(){
-   $('input#text').quicksearch('#container .item', {
+   $('input#textfilter').quicksearch('#container .item', {
         'show': function() {
             $(this).addClass('quicksearch-match');
         },

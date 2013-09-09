@@ -66,19 +66,17 @@ if (Meteor.isClient) {
     var blockname = event.currentTarget.parentElement.parentElement.parentElement.children["value"].innerText;
     var value = event.currentTarget.parentElement.children["textTag"].value;
 
-    
-    if(text != ""){   
-     Meteor.call('updateblock', blockname, value , function(err,response) {
-      if(err) {
-        Session.set('serverDataResponse', "Error:" + err.reason);
-        return;
-      }
-      Session.set('serverDataResponse', response);
-    });
-    }
-
-    //$("#textTag").val('');
+    updateTag(blockname,value);
+   
  
+  },
+  'keypress input': function(event) {
+      if (event.charCode == 13) {
+          var blockname = event.currentTarget.parentElement.parentElement.parentElement.children["value"].innerText;
+          var value = event.currentTarget.parentElement.children["textTag"].value;
+
+          updateTag(blockname,value);
+      }
   }
   
 }); 
@@ -111,6 +109,23 @@ function keypress(){
         setTimeout( function() {
             container.isotope({ filter: '.quicksearch-match' }).isotope(); 
         }, 100 );
+    });
+
+}
+
+function updateTag(blockname,value){
+   if(text != ""){   
+     Meteor.call('updateblock', blockname, value , function(err,response) {
+      if(err) {
+        Session.set('serverDataResponse', "Error:" + err.reason);
+        return;
+      }
+      Session.set('serverDataResponse', response);
+    });
+    }
+
+    container.find('input#textTag').each(function() {
+        $(this).val('');
     });
 
 }

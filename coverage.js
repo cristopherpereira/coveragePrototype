@@ -6,7 +6,7 @@ if (Meteor.isClient) {
   Template.container.rendered = function () {
      
     container = $(this.find("#container"));
-  
+
   }
 
   Template.block.rendered = function () {
@@ -19,9 +19,7 @@ if (Meteor.isClient) {
       
       container.isotope({
         itemSelector : '.item',
-        layoutMode : 'masonry',
          masonry: {
-          columnWidth: 30,
           cornerStampSelector: '.corner-stamp'
         },
         getSortData : {
@@ -34,8 +32,12 @@ if (Meteor.isClient) {
       container.isotope({sortBy: "number"});
     } else if (container.hasClass("isotope")) {
       console.log("Updating isotope");
-      container.isotope('insert', $(this.find(".item:not(.isotope-item)")));
+      container.isotope('addItems', $(this.find(".item:not(.isotope-item)")), function() {
+                container.isotope();
+            });
     }
+
+    
   }
 
   Template.filter.events = {
@@ -43,18 +45,7 @@ if (Meteor.isClient) {
       /*var text = $("#text")[0].value;
         Session.set("search", text);*/
 
-       $('input#text').quicksearch('#container .item', {
-        'show': function() {
-            $(this).addClass('quicksearch-match');
-        },
-        'hide': function() {
-            $(this).removeClass('quicksearch-match');
-        }
-    }).keyup(function(){
-        setTimeout( function() {
-            container.isotope({ filter: '.quicksearch-match' }).isotope(); 
-        }, 100 );
-    });
+      keypress();
     }
   }
 
@@ -106,5 +97,20 @@ if (Meteor.isServer) {
     }
   }
 
+function keypress(){
+   $('input#text').quicksearch('#container .item', {
+        'show': function() {
+            $(this).addClass('quicksearch-match');
+        },
+        'hide': function() {
+            $(this).removeClass('quicksearch-match');
+        }
+    }).keyup(function(){
+        setTimeout( function() {
+            container.isotope({ filter: '.quicksearch-match' }).isotope(); 
+        }, 100 );
+    });
+
+}
   
 }

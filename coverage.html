@@ -22,11 +22,16 @@
 </template>
 
 <template name="block">
-	<div class="item block">
+	<div value={{_id}} class="item block">
 		<div>
 			{{num}}
 		</div>
-		<img class="image" src="{{img}}">
+		<div>
+			<img class="image" src="{{img}}">
+		</div>
+		<div>
+			Tags: {{tags}}
+		</div>
 	</div>
 
 </template>

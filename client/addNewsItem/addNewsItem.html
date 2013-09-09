@@ -1,0 +1,21 @@
+<template name="addNewsItemContentPanel">
+		<div class="addnewkey">
+			<div style="{{#if AddingNewNewsItem}} display: none;{{/if}}">
+				{{> addNewNewsItemTemplate}}
+			</div>
+			<div style="{{#unless AddingNewNewsItem}} display: none;{{/unless}}">
+				{{> addNewNewsItemFormTemplate}}
+			</div>
+		</div>
+</template>
+
+<template name="addNewNewsItemTemplate">
+	<button type="button" class="add">Add</button>
+</template>
+
+<template name="addNewNewsItemFormTemplate">
+	<input id="text" class="num" name="num" type="text" placeholder="Name"/>
+	<input id="text" class="img" name="img" type="text" placeholder="Image Link"/>
+	<button type="button" class="save">Save</button>
+	<button type="button" class="cancel">Cancel</button>
+</template>

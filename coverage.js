@@ -16,7 +16,7 @@ if (Meteor.isClient) {
       // This seems to run once per block. Wasteful.
       // console.log("Initialize isotope");
       // Initialize isotope
-      
+      container.imagesLoaded( function(){
       container.isotope({
         itemSelector : '.item',
          masonry: {
@@ -28,13 +28,16 @@ if (Meteor.isClient) {
           }
         }
       });
+      });
     
       container.isotope({sortBy: "number"});
     } else if (container.hasClass("isotope")) {
       console.log("Updating isotope");
+      container.imagesLoaded( function(){
       container.isotope('addItems', $(this.find(".item:not(.isotope-item)")), function() {
                 container.isotope();
             });
+      });
     }
 
     
@@ -73,6 +76,8 @@ if (Meteor.isClient) {
       Session.set('serverDataResponse', response);
     });
     }
+
+    //$("#textTag").val('');
  
   }
   

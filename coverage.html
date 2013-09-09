@@ -1,0 +1,32 @@
+<head>
+  <title>isotest</title>
+</head>
+
+<body>
+	<h1>Isotope Test</h1>	
+	{{> filter}}
+
+  {{> container}}
+</body>
+
+<template name="filter">
+	<input id="text" name="quicksearch" type="text" placeholder="Quick Search"/>	
+</template>
+
+<template name="container">
+	<div id="container">
+		{{#each blocks}}
+		{{> block}}
+		{{/each}}
+	</div>
+</template>
+
+<template name="block">
+	<div class="item block">
+		<div>
+			{{num}}
+		</div>
+		<img class="image" src="{{img}}">
+	</div>
+
+</template>

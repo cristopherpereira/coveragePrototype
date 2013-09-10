@@ -102,8 +102,6 @@ if (Meteor.isClient) {
     var value = event.currentTarget.parentElement.children["textTag"].value;
 
     updateTag(blockname,value);
-   
- 
   },
   'click .editText': function (event) {
     //Template.block.EditTextMode = !Template.block.EditTextMode;
@@ -145,7 +143,7 @@ if (Meteor.isServer) {
        Blocks.update({ _id: blockname }, { $push: { tags: value } });
       },
       updateBlockFullText: function (blockname, value) {
-       Blocks.update({ _id: blockname }, { text: value });
+       Blocks.update({ _id: blockname }, { $set: { text: value } });
       }
     });
   });
@@ -194,10 +192,5 @@ function updateFullText(blockname,value){
       Session.set('serverDataResponse', response);
     });
     }
-
-    /*container.find('input#textTag').each(function() {
-        $(this).val('');
-    });*/
-
 }
   

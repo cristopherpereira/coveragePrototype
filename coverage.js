@@ -1,7 +1,8 @@
 Blocks = new Meteor.Collection("blocks");
-
 if (Meteor.isClient) {
   var container = {};
+  //Session.set("EditTextMode", false);
+  Session.set("selectedToTextEditId", "");
 
   Template.container.rendered = function () {
      
@@ -57,15 +58,39 @@ if (Meteor.isClient) {
     }*/
     return Blocks.find();
   };
+
+  //Template.block.EditTextMode = false;
+
+  Template.block.helpers({
+    EditTextMode : function(id) {
+      return id == Session.get("selectedToEditId");
+    },
+    IsEdit: function(id){
+      return id == Session.get("selectedToEditId");
+    }
+  });
   
   Template.block.events({
-  'click .add': function (event) {
-    var blockname = event.currentTarget.parentElement.parentElement.parentElement.children["value"].innerText;
+  'click .addnewtag .add': function (event) {
+    debugger;
+    var blockname = event.currentTarget.parentElement.parentElement.parentElement.id;//children["value"].innerText;
     var value = event.currentTarget.parentElement.children["textTag"].value;
 
     updateTag(blockname,value);
    
  
+  },
+  'click .editText': function (event) {
+    debugger;
+    //Template.block.EditTextMode = !Template.block.EditTextMode;
+    //Session.set("EditTextMode", true);
+    Session.set("selectedToEditId", this._id);
+  },
+  'click .Fulltext .cancel': function (event) {
+    debugger;
+    //Template.block.EditTextMode = !Template.block.EditTextMode;
+    //Session.set("EditTextMode", true);
+    Session.set("selectedToEditId", "");
   },
   'keypress input': function(event) {
       if (event.charCode == 13) {
@@ -88,7 +113,10 @@ if (Meteor.isServer) {
    Meteor.startup(function () {
     Meteor.methods({
       updateblock: function (blockname, value) {
-       Blocks.update({ num: blockname }, { $push: { tags: value } });
+       Blocks.update({ _id: blockname }, { $push: { tags: value } });
+      },
+      updateBlockFullText: function (blockname, value) {
+       Blocks.update({ _id: blockname }, { text: value });
       }
     });
   });
@@ -124,6 +152,23 @@ function updateTag(blockname,value){
     container.find('input#textTag').each(function() {
         $(this).val('');
     });
+
+}
+
+function updateFullText(blockname,value){
+   if(value != ""){   
+     Meteor.call('updateBlockFullText', blockname, value , function(err,response) {
+      if(err) {
+        Session.set('serverDataResponse', "Error:" + err.reason);
+        return;
+      }
+      Session.set('serverDataResponse', response);
+    });
+    }
+
+    /*container.find('input#textTag').each(function() {
+        $(this).val('');
+    });*/
 
 }
   

@@ -61,3 +61,7 @@
        -o-transition-duration: 0s;
           transition-duration: 0s;
 }
+
+.editText{
+  width:15px !important;
+}

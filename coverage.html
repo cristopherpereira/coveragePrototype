@@ -23,7 +23,7 @@
 </template>
 
 <template name="block">
-	<div value={{num}} class="item block quicksearch-match">
+	<div id={{_id}} class="item block quicksearch-match">
 		<div id="value">
 			{{num}}
 		</div>
@@ -31,7 +31,16 @@
 			<img class="image" src="{{img}}">
 		</div>
 		<div class="Fulltext">
-			{{text}}
+			{{#isolate}}
+				{{#if EditTextMode _id}}
+					<input id="fullTextEdit" type="text" placeholder="Edit Text"/>
+					<button type="button" class="add">+</button>
+					<button type="button" class="cancel">x</button>
+				{{else}}				
+					{{text}}
+					<input type="image" src="../../Edit.png" class="editText" alt="Edit">
+				{{/if}}
+			{{/isolate}}
 		</div>
 		<br/>
 		<div>

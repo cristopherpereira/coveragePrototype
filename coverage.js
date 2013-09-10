@@ -60,7 +60,7 @@ if (Meteor.isClient) {
     'click .filtertag': function (event) {
       var classname = event.currentTarget.value;
 
-      classname = '.' + classname;
+      classname = '.' + classname.replace(" ", ".");
      
       setTimeout( function() {
             container.isotope({ filter: classname }).isotope(); 
@@ -141,6 +141,11 @@ if (Meteor.isServer) {
     Meteor.methods({
       updateblock: function (blockname, value) {
        Blocks.update({ _id: blockname }, { $push: { tags: value } });
+       var tag = Filters.find({tag : value}).fetch();
+
+       if(tag.length == 0){
+          Filters.insert({tag : value});
+       }
       },
       updateBlockFullText: function (blockname, value) {
        Blocks.update({ _id: blockname }, { $set: { text: value } });

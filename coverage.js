@@ -108,6 +108,18 @@ if (Meteor.isClient) {
       for (var i = 0; i < myStringArray.length; i++) {
           $("#" + this._id).addClass(myStringArray[i]);
       }
+    },
+    IsImage: function(type){
+      if(type == 'image')
+        return true;
+      else
+        return false;
+    },
+    IsVideo: function(type){
+      if(type == 'video')
+        return true;
+      else
+        return false;
     }
   });    
   

@@ -8,8 +8,7 @@
 	{{> filter}}
 	{{> addNewsItemContentPanel}}
 
-  {{> container}}
-  <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/watch?v=cn3F-QurAL4" allowfullscreen frameborder="0"></iframe>
+  {{> container}} 
 </body>
 
 <template name="filter">
@@ -36,9 +35,16 @@
 			{{num}}
 		</div>
 		<div>
+			{{#if IsImage linkType}}
+				<img class="image" src="{{img}}">
+			{{else}}	
+				{{#if IsVideo linkType}}
+					<iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/{{img}}" allowfullscreen frameborder="0"></iframe>
+				{{else}}
+					{{img}}
+				{{/if}}
 
-			<img class="image" src="{{img}}">			
-
+			{{/if}}
 		</div>
 		<div class="Fulltext">
 			{{#isolate}}

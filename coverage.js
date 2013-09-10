@@ -125,7 +125,10 @@ if (Meteor.isClient) {
         return true;
       else
         return false;
-    }
+    },
+	LoadTweet: function(url){
+		checkTwitter(this.img);		
+  }
   });    
   
   Template.block.events({
@@ -175,18 +178,12 @@ if (Meteor.isClient) {
       return Filters.find({},{sort : {tag : 1}});
     }
   }); 
-
-  Template.tweet.helpers({
-    LoadTweet: function(){
-		checkTwitter('https://twitter.com/waltmossberg/status/377433466612109312');
-		
-  }
-});
-
- 
  }
 
-if (Meteor.isServer) {
+if (Meteor.isServer) { 
+
+
+
    Meteor.startup(function () {
     Meteor.methods({
 		checkTwitter: function (url) {
@@ -256,13 +253,17 @@ function updateFullText(blockname,value){
 
 function checkTwitter(url){
    if(url != ""){   
-   debugger;
+   
      Meteor.call('checkTwitter', url , function(err,response) {
       if(err) {
         Session.set('serverDataResponse', "Error:" + err.reason);
         return;
       }
-	  debugger;
+	  var xml = response.content;
+	  var xmlDoc = $.parseXML( xml );
+	  var $xml = $( xmlDoc );
+	  var $html = $xml.find("html").text();
+	  $(tweet).html($html);
       Session.set('serverDataResponse', response);
     });
     }

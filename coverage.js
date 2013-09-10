@@ -9,6 +9,23 @@ if (Meteor.isClient) {
   Template.container.rendered = function () {     
     container = $(this.find("#container"));   
   }
+  Template.container.rendered = function () {
+     
+    container = $(this.find("#container"));
+		$("#datepicker" ).datepicker();
+		$("#StartDate").datepicker({
+            dateFormat: 'mm/dd/yy',
+            changeMonth: true,
+            changeYear: true,
+            showOn: 'button',
+            buttonImage: '../../calendar.jpg',
+            onSelect: function(dateText, inst) { 
+					$('input#textfilter').val($("#StartDate").val());
+					keypress();
+					$('input#textfilter').trigger($.Event('keyup'));
+				}
+        });
+}
 
   Template.container.blocks = function () {    
     return Blocks.find();
@@ -57,6 +74,7 @@ if (Meteor.isClient) {
     'keypress  input#textfilter': function (event) {
          keypress();
     },
+
     'click .filtertag': function (event) {
       var classname = event.currentTarget.value;
 
@@ -67,6 +85,7 @@ if (Meteor.isClient) {
         }, 100 );
    
     }
+
   }
 
 
@@ -120,6 +139,8 @@ if (Meteor.isClient) {
     updateFullText(blockname,value);
     Session.set("selectedToEditId", "");
   },
+  
+
   'keypress input': function(event) {
       if (event.charCode == 13) {
           var blockname = event.currentTarget.parentElement.parentElement.parentElement.children["value"].innerText;
@@ -193,7 +214,6 @@ function updateTag(blockname,value){
     });
 
 }
-
 function updateFullText(blockname,value){
    if(value != ""){   
      Meteor.call('updateBlockFullText', blockname, value , function(err,response) {
@@ -205,4 +225,5 @@ function updateFullText(blockname,value){
     });
     }
 }
+
   

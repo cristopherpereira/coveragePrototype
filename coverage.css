@@ -16,7 +16,9 @@ body {
   margin: 30px;
 }
 
-
+#container {
+	z-index: -1;
+}
 
 /**** Isotope Filtering ****/
 

@@ -11,7 +11,7 @@ Template.addNewNewsItemFormTemplate.events({
 
 	var date = new Date();
 	var day = date.getDate();
-	var month = date.getMonth()+1;
+	var month = ("0" + (date.getMonth() + 1)).slice(-2)
 	var year = date.getFullYear();
 
 	var fullVal = $(".fulltext",event.target.parentNode.parentElement).val();

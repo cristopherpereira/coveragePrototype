@@ -1,6 +1,7 @@
 <head>
   <title>Coverage Prototype</title>
-</head>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+ </head>
 
 <body>
 	<h1>Coverage Prototype</h1>	
@@ -12,6 +13,7 @@
 
 <template name="filter">
 	<input id="textfilter" name="quicksearch" type="text" placeholder="Quick Search"/>	
+	<input class="date" id="StartDate" name="StartDate" value="" type="hidden" />
 	<input class="filtertag All" name="quicksearch" type="button" value="All"/>	
 	{{#each FiltersHelper}}
 		<input class="filtertag {{tag}}" name="quicksearch" type="button" value="{{tag}}"/>	
@@ -19,6 +21,7 @@
 </template>
 
 <template name="container">
+
 	<div id="container">
 		{{#each blocks}}
 		{{> block}}

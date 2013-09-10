@@ -38,11 +38,11 @@
 				<button type="button" class="add">+</button>
 			</div>
 		</div>
-				<div>
-			<span> Added at:{{dateAdded}} <span>
-		</di>
-		</div>
-
+		{{#if dateAdded}}
+			<div>
+				<span> Added at:{{dateAdded}} </span> 
+			</div>
+		{{/if}}	
 	</div>
 
 </template>

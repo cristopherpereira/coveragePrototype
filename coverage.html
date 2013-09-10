@@ -4,11 +4,12 @@
  </head>
 
 <body>
-	<h1>Coverage Prototype</h1>	
+	<h1>Coverage Prototype</h1>		
 	{{> filter}}
 	{{> addNewsItemContentPanel}}
 
   {{> container}}
+  <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/watch?v=cn3F-QurAL4" allowfullscreen frameborder="0"></iframe>
 </body>
 
 <template name="filter">
@@ -35,7 +36,9 @@
 			{{num}}
 		</div>
 		<div>
-			<img class="image" src="{{img}}">
+
+			<img class="image" src="{{img}}">			
+
 		</div>
 		<div class="Fulltext">
 			{{#isolate}}
@@ -51,12 +54,14 @@
 		</div>
 		<br/>
 		<div>
-			Tags: {{tags}} 
-			
-			<div class="addnewtag">			
-				<input id="textTag" type="text" placeholder="Add Tag"/>
-				<input type="image" src="../../Add.png" class="add" alt="Add">
-			</div>
+			{{#isolate}}
+				Tags: {{tags}} 
+				
+				<div class="addnewtag">			
+					<input id="textTag" type="text" placeholder="Add Tag"/>
+					<input type="image" src="../../Add.png" class="add" alt="Add">
+				</div>
+			{{/isolate}}
 		</div>
 		{{#if dateAdded}}
 			<div>

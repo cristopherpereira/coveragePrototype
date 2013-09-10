@@ -51,7 +51,7 @@ if (Meteor.isClient) {
         },
         getSortData : {
           number : function( $elem ) {
-            return $elem.text();
+            return $elem.find('#value').text();
           }
         }
       });
@@ -65,6 +65,7 @@ if (Meteor.isClient) {
                 container.isotope();
             });
       });
+
     }
 
     
@@ -89,13 +90,8 @@ if (Meteor.isClient) {
   }
 
 
-  Template.container.blocks = function () {
-    /*var text = Session.get("search");
-    if(text != null && text != ""){
-      
-        return Blocks.find({num: new RegExp(text,"i")});
-    }*/
-    return Blocks.find();
+  Template.container.blocks = function () {  
+    return Blocks.find({},{sort : {tag : 1}});
   };
 
   //Template.block.EditTextMode = false;

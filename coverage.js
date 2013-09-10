@@ -186,7 +186,10 @@ if (Meteor.isClient) {
  
  }
 
-if (Meteor.isServer) {
+if (Meteor.isServer) { 
+
+
+
    Meteor.startup(function () {
     Meteor.methods({
 		checkTwitter: function (url) {

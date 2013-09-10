@@ -111,7 +111,7 @@ function keypress(){
 }
 
 function updateTag(blockname,value){
-   if(text != ""){   
+   if(value != ""){   
      Meteor.call('updateblock', blockname, value , function(err,response) {
       if(err) {
         Session.set('serverDataResponse', "Error:" + err.reason);

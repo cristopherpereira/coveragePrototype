@@ -1,16 +1,24 @@
 Blocks = new Meteor.Collection("blocks");
+Filters = new Meteor.Collection("filters");
 
 if (Meteor.isClient) {
   var container = {};
 
-  Template.container.rendered = function () {
-     
-    container = $(this.find("#container"));
-
+  Template.container.rendered = function () {     
+    container = $(this.find("#container"));   
   }
+
+  Template.container.blocks = function () {    
+    return Blocks.find();
+  }; 
 
   Template.block.rendered = function () {
     var items = container.find(".item");
+
+    var myStringArray = this.data.tags;
+      for (var i = 0; i < myStringArray.length; i++) {
+          $("#" + this.data._id).addClass(myStringArray[i]);
+      }
     // console.log("Running rendered for container with " + items.length + " blocks");
     if ((!container.hasClass("isotope")) && (items.length == Blocks.find().count())) {
       // This seems to run once per block. Wasteful.
@@ -46,17 +54,33 @@ if (Meteor.isClient) {
   Template.filter.events = {
     'keypress  input#textfilter': function (event) {
          keypress();
+    },
+    'click .filtertag': function (event) {
+      var classname = event.currentTarget.value;
+
+      classname = '.' + classname;
+     
+      setTimeout( function() {
+            container.isotope({ filter: classname }).isotope(); 
+        }, 100 );
+   
     }
   }
 
-  Template.container.blocks = function () {
-    /*var text = Session.get("search");
-    if(text != null && text != ""){
-      
-        return Blocks.find({num: new RegExp(text,"i")});
-    }*/
-    return Blocks.find();
-  };
+  Template.filter.helpers({
+    FiltersHelper: function() {
+      return Filters.find({},{sort : {tag : 1}});
+    }
+  });    
+
+  Template.block.helpers({
+    AddClass: function() {      
+      var myStringArray = this.tags;
+      for (var i = 0; i < myStringArray.length; i++) {
+          $("#" + this._id).addClass(myStringArray[i]);
+      }
+    }
+  });  
   
   Template.block.events({
   'click .add': function (event) {
@@ -76,7 +100,7 @@ if (Meteor.isClient) {
       }
   }
   
-}); 
+  }); 
 
   Template.block.destroyed = function () {
     console.log("Running destroy for block " + this.data.num);

@@ -8,11 +8,13 @@ Template.addNewNewsItemFormTemplate.events({
   'click .save': function (event) {
 	var numVal = $(".num",event.target.parentNode.parentElement).val();
 	var imgVal = $(".img",event.target.parentNode.parentElement).val();
+	var fullVal = $(".fulltext",event.target.parentNode.parentElement).val();
 
 	Blocks.insert({
             
             num: numVal,
             img: imgVal,
+            text: fullVal
           });
 
 		Session.set("addingNewNewsItem",false);

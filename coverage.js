@@ -175,11 +175,25 @@ if (Meteor.isClient) {
       return Filters.find({},{sort : {tag : 1}});
     }
   }); 
-}
+
+  Template.tweet.helpers({
+    LoadTweet: function(){
+		checkTwitter('https://twitter.com/waltmossberg/status/377433466612109312');
+		
+  }
+});
+
+ 
+ }
 
 if (Meteor.isServer) {
    Meteor.startup(function () {
     Meteor.methods({
+		checkTwitter: function (url) {
+				this.unblock();
+				console.log(url);
+				return Meteor.http.call('GET', 'https://api.twitter.com/1/statuses/oembed.xml?url='+url);
+			},
       updateblock: function (blockname, value) {
        Blocks.update({ _id: blockname }, { $push: { tags: value } });
        var tag = Filters.find({tag : value}).fetch();
@@ -237,6 +251,21 @@ function updateFullText(blockname,value){
       Session.set('serverDataResponse', response);
     });
     }
+
 }
 
+function checkTwitter(url){
+   if(url != ""){   
+   debugger;
+     Meteor.call('checkTwitter', url , function(err,response) {
+      if(err) {
+        Session.set('serverDataResponse', "Error:" + err.reason);
+        return;
+      }
+	  debugger;
+      Session.set('serverDataResponse', response);
+    });
+    }
+
+}
   

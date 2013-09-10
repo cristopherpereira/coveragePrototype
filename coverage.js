@@ -113,6 +113,13 @@ if (Meteor.isClient) {
     //Session.set("EditTextMode", true);
     Session.set("selectedToEditId", "");
   },
+  'click .Fulltext .add': function (event) {
+    var blockname = event.currentTarget.parentElement.parentElement.id;
+    var value = event.currentTarget.parentElement.children["fullTextEdit"].value;
+
+    updateFullText(blockname,value);
+    Session.set("selectedToEditId", "");
+  },
   'keypress input': function(event) {
       if (event.charCode == 13) {
           var blockname = event.currentTarget.parentElement.parentElement.parentElement.children["value"].innerText;

@@ -60,7 +60,7 @@ if (Meteor.isClient) {
     'click .filtertag': function (event) {
       var classname = event.currentTarget.value;
 
-      classname = '.' + classname;
+      classname = '.' + classname.replace(" ", ".");
      
       setTimeout( function() {
             container.isotope({ filter: classname }).isotope(); 
@@ -102,8 +102,6 @@ if (Meteor.isClient) {
     var value = event.currentTarget.parentElement.children["textTag"].value;
 
     updateTag(blockname,value);
-   
- 
   },
   'click .editText': function (event) {
     //Template.block.EditTextMode = !Template.block.EditTextMode;
@@ -143,9 +141,14 @@ if (Meteor.isServer) {
     Meteor.methods({
       updateblock: function (blockname, value) {
        Blocks.update({ _id: blockname }, { $push: { tags: value } });
+       var tag = Filters.find({tag : value}).fetch();
+
+       if(tag.length == 0){
+          Filters.insert({tag : value});
+       }
       },
       updateBlockFullText: function (blockname, value) {
-       Blocks.update({ _id: blockname }, { text: value });
+       Blocks.update({ _id: blockname }, { $set: { text: value } });
       }
     });
   });
@@ -194,10 +197,5 @@ function updateFullText(blockname,value){
       Session.set('serverDataResponse', response);
     });
     }
-
-    /*container.find('input#textTag').each(function() {
-        $(this).val('');
-    });*/
-
 }
   

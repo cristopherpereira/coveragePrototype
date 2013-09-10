@@ -36,7 +36,7 @@
 		<div class="Fulltext">
 			{{#isolate}}
 				{{#if EditTextMode _id}}
-					<input id="fullTextEdit" type="text" placeholder="Edit Text"/>
+					<textarea id="fullTextEdit" rows="4" placeholder="Edit Text">{{text}}</textarea>
 					<button type="button" class="add">+</button>
 					<button type="button" class="cancel">x</button>
 				{{else}}				

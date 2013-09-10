@@ -98,7 +98,6 @@ if (Meteor.isClient) {
   
   Template.block.events({
   'click .addnewtag .add': function (event) {
-    debugger;
     var blockname = event.currentTarget.parentElement.parentElement.parentElement.id;//children["value"].innerText;
     var value = event.currentTarget.parentElement.children["textTag"].value;
 
@@ -107,13 +106,11 @@ if (Meteor.isClient) {
  
   },
   'click .editText': function (event) {
-    debugger;
     //Template.block.EditTextMode = !Template.block.EditTextMode;
     //Session.set("EditTextMode", true);
     Session.set("selectedToEditId", this._id);
   },
   'click .Fulltext .cancel': function (event) {
-    debugger;
     //Template.block.EditTextMode = !Template.block.EditTextMode;
     //Session.set("EditTextMode", true);
     Session.set("selectedToEditId", "");

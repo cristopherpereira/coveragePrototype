@@ -96,7 +96,7 @@ if (Meteor.isClient) {
 
 
   Template.container.blocks = function () {  
-    return Blocks.find({},{sort : {tag : 1}});
+    return Blocks.find({},{sort : {num : 1}});
   };
 
   //Template.block.EditTextMode = false;

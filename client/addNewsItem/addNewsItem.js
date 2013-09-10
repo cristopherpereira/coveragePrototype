@@ -6,8 +6,10 @@ Template.addNewNewsItemTemplate.events({
 
 Template.addNewNewsItemFormTemplate.events({
   'click .save': function (event) {
+	debugger;
 	var numVal = $(".num",event.target.parentNode.parentElement).val();
 	var imgVal = $(".img",event.target.parentNode.parentElement).val();
+	var linkType = $("#linkType",event.target.parentNode.parentElement).val();
 
 	var date = new Date();
 	var day = date.getDate();
@@ -20,7 +22,8 @@ Template.addNewNewsItemFormTemplate.events({
             num: numVal,
             img: imgVal,
 			dateAdded: month+"/"+day+"/"+year,
-            text: fullVal
+            text: fullVal,
+            linkType: linkType
           });
 
 		Session.set("addingNewNewsItem",false);

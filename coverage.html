@@ -37,8 +37,8 @@
 			{{#isolate}}
 				{{#if EditTextMode _id}}
 					<textarea id="fullTextEdit" rows="4" placeholder="Edit Text">{{text}}</textarea>
-					<button type="button" class="add">+</button>
-					<button type="button" class="cancel">x</button>
+					<input type="image" src="../../Add.png" class="add" alt="Add">
+					<input type="image" src="../../Cancel.png" class="cancel" alt="Cancel">
 				{{else}}				
 					{{text}}
 					<input type="image" src="../../Edit.png" class="editText" alt="Edit">
@@ -51,7 +51,7 @@
 			
 			<div class="addnewtag">			
 				<input id="textTag" type="text" placeholder="Add Tag"/>
-				<button type="button" class="add">+</button>
+				<input type="image" src="../../Add.png" class="add" alt="Add">
 			</div>
 		</div>
 		{{#if dateAdded}}

@@ -22,9 +22,7 @@
 </template>
 
 <template name="tweet">
-<div id="tweet">
-	{{LoadTweet}}
-</div>
+
 </template>
 
 <template name="container">
@@ -48,7 +46,9 @@
 				{{#if IsVideo linkType}}
 					<iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/{{img}}" allowfullscreen frameborder="0"></iframe>
 				{{else}}
-					{{>tweet }}
+					<div id="tweet">
+						{{LoadTweet}}
+					</div>
 				{{/if}}
 
 			{{/if}}

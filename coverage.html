@@ -12,6 +12,7 @@
 
 <template name="filter">
 	<input id="textfilter" name="quicksearch" type="text" placeholder="Quick Search"/>	
+	<input class="filtertag All" name="quicksearch" type="button" value="All"/>	
 	{{#each FiltersHelper}}
 		<input class="filtertag {{tag}}" name="quicksearch" type="button" value="{{tag}}"/>	
 	{{/each}}

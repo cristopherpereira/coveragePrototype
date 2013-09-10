@@ -8,16 +8,19 @@ Template.addNewNewsItemFormTemplate.events({
   'click .save': function (event) {
 	var numVal = $(".num",event.target.parentNode.parentElement).val();
 	var imgVal = $(".img",event.target.parentNode.parentElement).val();
+
 	var date = new Date();
 	var day = date.getDate();
 	var month = date.getMonth()+1;
 	var year = date.getFullYear();
-	debugger;
-	Blocks.insert({
-            
+
+	var fullVal = $(".fulltext",event.target.parentNode.parentElement).val();
+
+	Blocks.insert({            
             num: numVal,
             img: imgVal,
-			dateAdded: month+"/"+day+"/"+year
+			dateAdded: month+"/"+day+"/"+year,
+            text: fullVal
           });
 
 		Session.set("addingNewNewsItem",false);

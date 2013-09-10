@@ -35,27 +35,32 @@ if (Meteor.isClient) {
     var items = container.find(".item");
 
     var myStringArray = this.data.tags;
+    if(myStringArray)
+    {
       for (var i = 0; i < myStringArray.length; i++) {
           $("#" + this.data._id).addClass(myStringArray[i]);
       }
+    }
     // console.log("Running rendered for container with " + items.length + " blocks");
     if ((!container.hasClass("isotope")) && (items.length == Blocks.find().count())) {
       // This seems to run once per block. Wasteful.
       // console.log("Initialize isotope");
       // Initialize isotope
-      container.imagesLoaded( function(){
-      container.isotope({
-        itemSelector : '.item',
-         masonry: {
-          cornerStampSelector: '.corner-stamp'
-        },
-        getSortData : {
-          number : function( $elem ) {
-            return $elem.find('#value').text();
+     
+        container.imagesLoaded( function(){
+        container.isotope({
+          itemSelector : '.item',
+           masonry: {
+            cornerStampSelector: '.corner-stamp'
+          },
+          getSortData : {
+            number : function( $elem ) {
+              return $elem.find('#value').text();
+            }
           }
-        }
-      });
-      });
+        });
+        });
+     
     
       container.isotope({sortBy: "number"});
     } else if (container.hasClass("isotope")) {

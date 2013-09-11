@@ -56,9 +56,11 @@
 						<iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/{{img}}" allowfullscreen frameborder="0"></iframe>
 					</div>
 				{{else}}
-					<div id="tweet">
-						{{LoadTweet}}
-					</div>
+					{{#if IsTweet linkType img}}
+						<div id="tweet">
+							{{LoadTweet}}
+						</div>
+					{{/if}}
 				{{/if}}
 
 			{{/if}}

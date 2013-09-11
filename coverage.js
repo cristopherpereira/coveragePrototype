@@ -124,9 +124,15 @@ if (Meteor.isClient) {
       else
         return false;
     },
+	IsTweet: function(type, url){
+		if(type == 'tweet'&& url != undefined && url != '')
+			return true;
+		else
+			return false;
+	},
 	LoadTweet: function(url){
 		checkTwitter(this.img,this._id);		
-  }
+	}
   });    
   
   Template.block.events({

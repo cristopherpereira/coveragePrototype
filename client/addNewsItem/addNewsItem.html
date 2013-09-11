@@ -1,9 +1,9 @@
 <template name="addNewsItemContentPanel">
 		<div class="addnewkey">
-			<div style="{{#if AddingNewNewsItem}} display: none;{{/if}}">
+			<div class="buttonDiv" style="{{#if AddingNewNewsItem}} display: none;{{/if}}">
 				{{> addNewNewsItemTemplate}}
 			</div>
-			<div style="{{#unless AddingNewNewsItem}} display: none;{{/unless}}">
+			<div class="formDiv" style="{{#unless AddingNewNewsItem}} display: none;{{/unless}}">
 				{{> addNewNewsItemFormTemplate}}
 			</div>
 		</div>
@@ -11,6 +11,7 @@
 
 <template name="addNewNewsItemTemplate">
 	<input type="image" src="../../Add.png" class="add" alt="Add">
+	<b>Add new item</b>
 </template>
 
 <template name="addNewNewsItemFormTemplate">

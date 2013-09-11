@@ -1,0 +1,141 @@
+/* CSS declarations go here */
+.block {
+	background-color: rgb(255, 255, 255);
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+	border: 2px solid black;
+	padding-top: 15px;
+	font-size: 10px;
+	text-align: center;
+	max-width: 300px;
+	min-width: 300px; 
+	margin: 10px; 
+}
+
+.block .title {
+    font-size: 15px;
+    font-weight:bold;
+}
+
+.block .tagTitle {
+  font-size: 12px;
+  font-weight:bold;
+}
+
+.imgBox{
+	margin: 10px
+}
+body {
+
+  margin: 30px;
+  .header {
+    background-color: white;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+  }
+}
+
+#container {
+	z-index: 0;
+}
+
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+.editText{
+  width:15px !important;
+}
+
+.filtertag {
+    background-color: #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color: #fff;
+    font-family: 'Oswald';
+    font-size: 20px;
+    text-decoration: none;
+    cursor: poiner;
+     border:none;
+     margin-bottom: 10px;
+}
+.filtertag.selected {
+  background-color: #aaa;
+}
+
+
+
+.filtertag:hover {
+    border: none;
+    background:#bbb;
+    box-shadow: 0px 0px 1px #777;
+
+}
+
+
+.addnewkey {
+  .buttonDiv {
+    clear:left;
+    float: left;
+  }
+  .formDiv {
+  }
+}
+
+.textFilterDiv {
+  float: left;
+  width: 370px;
+  clear:left;
+}
+
+.tagsFilterDiv {
+  margin-left: 400px;
+}

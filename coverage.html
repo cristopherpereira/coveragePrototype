@@ -4,21 +4,27 @@
  </head>
 
 <body>
-	<h1>Coverage Prototype</h1>		
-	{{> filter}}
-	{{> addNewsItemContentPanel}}
-
+		<h1>Coverage Prototype</h1>	
+	<div class="header">
+		{{> addNewsItemContentPanel}}
+		{{> filter}}
+	</div>
   {{> container}} 
 </body>
 
 <template name="filter">
-	<input id="textfilter" name="quicksearch" type="text" placeholder="Quick Search"/>	
-	<input class="date" id="StartDate" name="StartDate" value="" type="hidden" />
-	<br/>
-	<input class="filtertag selected All" name="quicksearch" type="button" value="All"/>	
-	{{#each FiltersHelper}}
-		<input class="filtertag" name="quicksearch" type="button" value="{{tag}}"/>	
-	{{/each}}
+	<div class="textFilterDiv">
+		<b>Text search:</b> <input id="textfilter" name="quicksearch" type="text" placeholder="Quick Search"/>	
+		<input class="date" id="StartDate" name="StartDate" value="" type="hidden" />
+		<br/>
+	</div>
+		<div class="tagsFilterDiv">
+		<b>Filter tag:</b>
+		<input class="filtertag selected All" name="quicksearch" type="button" value="All"/>	
+		{{#each FiltersHelper}}
+			<input class="filtertag" name="quicksearch" type="button" value="{{tag}}"/>	
+		{{/each}}
+	</div>
 </template>
 
 <template name="tweet">

@@ -52,7 +52,9 @@
 				</div>
 			{{else}}	
 				{{#if IsVideo linkType img}}
-					<iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/{{img}}" allowfullscreen frameborder="0"></iframe>
+					<div class="imgBox">
+						<iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/{{img}}" allowfullscreen frameborder="0"></iframe>
+					</div>
 				{{else}}
 					<div id="tweet">
 						{{LoadTweet}}

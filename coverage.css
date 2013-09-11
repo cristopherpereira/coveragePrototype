@@ -13,6 +13,30 @@
     -webkit-border-radius: 20px;
     -khtml-border-radius: 20px;
     border-radius: 20px;
+
+  transition: width 1s;
+  -moz-transition: width 1s; /* Firefox 4 */
+  -webkit-transition: width 1s; /* Safari and Chrome */
+  -o-transition: width 1s; /* Opera */
+  -ms-transition: width 1s; /* IE9 (maybe) */
+}
+
+.block:hover {
+    border: none;
+    background:#bbb;
+    box-shadow: 0px 0px 1px #777;
+}
+
+.image {
+  -webkit-transform: scale(1);
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transition-duration: 50ms;
+}
+
+.image:hover {
+  -webkit-transform: scale(1.10);
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transition-duration: 50ms;
 }
 
 .block .title {
@@ -25,8 +49,12 @@
   font-weight:bold;
 }
 
+.youtube-player{
+  width: 95%;
+}
+
 .imgBox{
-	margin: 10px
+	margin: 25px
 }
 body {
 	background: #E0E0E0;

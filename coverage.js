@@ -127,7 +127,7 @@ if (Meteor.isClient) {
         return false;
     },
 	LoadTweet: function(url){
-		checkTwitter(this.img);		
+		checkTwitter(this.img,this._id);		
   }
   });    
   
@@ -251,7 +251,7 @@ function updateFullText(blockname,value){
 
 }
 
-function checkTwitter(url){
+function checkTwitter(url, id){
    if(url != ""){   
    
      Meteor.call('checkTwitter', url , function(err,response) {
@@ -263,7 +263,7 @@ function checkTwitter(url){
 	  var xmlDoc = $.parseXML( xml );
 	  var $xml = $( xmlDoc );
 	  var $html = $xml.find("html").text();
-	  $(tweet).html($html);
+	  $("#" + id + " #tweet").html($html);
       Session.set('serverDataResponse', response);
     });
     }

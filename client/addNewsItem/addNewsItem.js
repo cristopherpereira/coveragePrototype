@@ -10,6 +10,16 @@ Template.addNewNewsItemFormTemplate.events({
 	var imgVal = $(".img",event.target.parentNode.parentElement).val();
 	var linkType = $("#linkType",event.target.parentNode.parentElement).val();
 
+	if(linkType == "video"){		
+		var video_id = imgVal.split('v=')[1];
+		var ampersandPosition = video_id.indexOf('&');
+		if(ampersandPosition != -1) {
+		  video_id = video_id.substring(0, ampersandPosition);
+		}
+
+		imgVal = video_id;
+	}
+
 	var date = new Date();
 	var day = date.getDate();
 	var month = ("0" + (date.getMonth() + 1)).slice(-2)

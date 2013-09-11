@@ -24,11 +24,18 @@ if (Meteor.isClient) {
 				}
         });
 }
- Template.page.helpers({    
+  Template.page.helpers({    
     ShowPopup: function(){
       return Session.get('openPopup'); 
     }
   });     
+
+  Template.page.events = {
+    'click .avgrund-cover': function (event) {
+        $().Avgrund.hide();
+        Session.set('openPopup', false);
+    }
+  }
 
   Template.block.rendered = function () {
     var items = container.find(".item");
@@ -191,6 +198,10 @@ if (Meteor.isClient) {
     else
       $().Avgrund.hide();
   }
+
+  Template.Popup.values = function () {  
+    return Session.get('selectedData');
+  };
  }
 
 if (Meteor.isServer) { 

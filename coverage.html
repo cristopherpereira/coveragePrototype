@@ -28,9 +28,9 @@
 	<input id="textfilter" name="quicksearch" type="text" placeholder="Quick Search"/>	
 	<input class="date" id="StartDate" name="StartDate" value="" type="hidden" />
 	<br/>
-	<input class="filtertag All" name="quicksearch" type="button" value="All"/>	
+	<input class="filtertag selected All" name="quicksearch" type="button" value="All"/>	
 	{{#each FiltersHelper}}
-		<input class="filtertag {{tag}}" name="quicksearch" type="button" value="{{tag}}"/>	
+		<input class="filtertag" name="quicksearch" type="button" value="{{tag}}"/>	
 	{{/each}}
 </template>
 
@@ -48,10 +48,12 @@
 			{{num}}
 		</div>
 		<div>
-			{{#if IsImage linkType}}
-				<img class="image" src="{{img}}">
+			{{#if IsImage linkType img}}
+				<div class="imgBox">
+					<img class="image" src="{{img}}">
+				</div>
 			{{else}}	
-				{{#if IsVideo linkType}}
+				{{#if IsVideo linkType img}}
 					<iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/{{img}}" allowfullscreen frameborder="0"></iframe>
 				{{else}}
 					<div id="tweet">

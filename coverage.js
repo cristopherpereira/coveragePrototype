@@ -82,13 +82,11 @@ if (Meteor.isClient) {
 
     'click .filtertag': function (event) {
       var classname = event.currentTarget.value;
-
       classname = '.' + classname.replace(" ", ".");
-     
-      setTimeout( function() {
-            container.isotope({ filter: classname }).isotope(); 
-        }, 100 );
-   
+      $(".filtertag").removeClass("selected");
+      $(event.currentTarget).addClass("selected");
+      Session.set("SearchText", classname);
+      keypress();
     }
 
   }
@@ -97,8 +95,6 @@ if (Meteor.isClient) {
   Template.container.blocks = function () {  
     return Blocks.find({},{sort : {num : 1}});
   };
-
-  //Template.block.EditTextMode = false;
 
   Template.block.helpers({
     EditTextMode : function(id) {
@@ -113,14 +109,14 @@ if (Meteor.isClient) {
           $("#" + this._id).addClass(myStringArray[i]);
       }
     },
-    IsImage: function(type){
-      if(type == 'image')
+    IsImage: function(type, img){
+      if(type == 'image' && img != undefined && img != '')
         return true;
       else
         return false;
     },
-    IsVideo: function(type){
-      if(type == 'video')
+    IsVideo: function(type, img){
+      if(type == 'video'&& img != undefined && img != '')
         return true;
       else
         return false;
@@ -224,17 +220,22 @@ if (Meteor.isServer) {
 }
 
 function keypress(){
+    var searchtext =Session.get("SearchText");
+    if (!searchtext) 
+      searchtext="";
+
    $('input#textfilter').quicksearch('#container .item', {
         'show': function() {
             $(this).addClass('quicksearch-match');
         },
         'hide': function() {
             $(this).removeClass('quicksearch-match');
+        },
+        onAfter: function() {
+          setTimeout( function() {
+              container.isotope({ filter: '.quicksearch-match'+searchtext }).isotope(); 
+          }, 100 );
         }
-    }).keyup(function(){
-        setTimeout( function() {
-            container.isotope({ filter: '.quicksearch-match' }).isotope(); 
-        }, 100 );
     });
 
 }

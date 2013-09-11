@@ -4,12 +4,25 @@
  </head>
 
 <body>
-	<h1>Coverage Prototype</h1>		
-	{{> filter}}
-	{{> addNewsItemContentPanel}}
-
-  {{> container}} 
+	{{> page}} 
 </body>
+
+<template name="page">
+	{{#isolate}}
+		{{#if ShowPopup}}
+			{{> Popup}}
+		{{/if}}	
+	{{/isolate}}
+
+	<div class="avgrund-contents">
+		<h1>Coverage Prototype</h1>		
+		{{> filter}}
+		{{> addNewsItemContentPanel}}
+
+	  {{> container}} 
+	 </div>
+	 <div class="avgrund-cover"></div>
+</template>
 
 <template name="filter">
 	<input id="textfilter" name="quicksearch" type="text" placeholder="Quick Search"/>	
@@ -21,16 +34,11 @@
 	{{/each}}
 </template>
 
-<template name="tweet">
-
-</template>
-
 <template name="container">
-
 	<div id="container">
 		{{#each blocks}}
 		{{> block}}
-		{{/each}}
+		{{/each}}		
 	</div>
 </template>
 
@@ -82,7 +90,22 @@
 			<div>
 				<span> Added at:{{dateAdded}} </span> 
 			</div>
-		{{/if}}	
+		{{/if}}			
 	</div>
+
+</template>
+
+<template name="Popup">
+
+	<aside id="default-popup" class="avgrund-popup">
+			<h2>That's all, folks</h2>
+			<p>
+				You can hit ESC or click outside to close the modal. Give it a go to see the reverse transition.
+			</p>
+			<p>
+				If you like this you would probably enjoy <a href="http://lab.hakim.se/meny">Meny</a>, <a href="http://lab.hakim.se/reveal-js">reveal.js</a> and <a href="http://lab.hakim.se/scroll-effects">stroll.js</a>.
+			</p>
+			<button class="close">Close</button>
+		</aside>
 
 </template>

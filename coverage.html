@@ -43,7 +43,7 @@
 			{{#if IsImage linkType img}}
 				<img class="image" src="{{img}}">
 			{{else}}	
-				{{#if IsVideo linkType}}
+				{{#if IsVideo linkType img}}
 					<iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/{{img}}" allowfullscreen frameborder="0"></iframe>
 				{{else}}
 					<div id="tweet">

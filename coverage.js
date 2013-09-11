@@ -120,8 +120,8 @@ if (Meteor.isClient) {
       else
         return false;
     },
-    IsVideo: function(type){
-      if(type == 'video')
+    IsVideo: function(type, img){
+      if(type == 'video'&& img != undefined && img != '')
         return true;
       else
         return false;

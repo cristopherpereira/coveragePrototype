@@ -63,7 +63,7 @@ if (Meteor.isClient) {
           },
           getSortData : {
             number : function( $elem ) {
-              return $elem.find('#value').text();
+              return $elem.find('.title').text();
             }
           }
         });
@@ -176,6 +176,10 @@ if (Meteor.isClient) {
   'click .image' : function(event) {
       Session.set('selectedData', this);
       Session.set('openPopup', true);
+  },
+  'click .title' : function(event) {
+      Session.set('selectedData', this);
+      Session.set('openPopup', true);
   }
   
   }); 
@@ -201,8 +205,12 @@ if (Meteor.isClient) {
   Template.Popup.rendered = function () {     
     var openPopup = Session.get('openPopup');
 
-    if(openPopup)
+    if(openPopup){
       $().Avgrund.show( "#default-popup" );
+      
+      var screenTop = $(window).scrollTop();
+      $('.avgrund-popup').css('top', screenTop*1.1);
+    }
     else
       $().Avgrund.hide();
   }

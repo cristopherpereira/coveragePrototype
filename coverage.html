@@ -4,13 +4,26 @@
  </head>
 
 <body>
-		<h1>Coverage Prototype</h1>	
-	<div class="header">
-		{{> addNewsItemContentPanel}}
-		{{> filter}}
-	</div>
-  {{> container}} 
+	{{> page}} 
 </body>
+
+<template name="page">
+	{{#isolate}}
+		{{#if ShowPopup}}
+			{{> Popup}}
+		{{/if}}	
+	{{/isolate}}
+
+	<div class="avgrund-contents">
+		<h1>Coverage Prototype</h1>	
+		<div class="header">
+			{{> addNewsItemContentPanel}}
+			{{> filter}}
+		</div>
+  		{{> container}} 
+	 </div>
+	 <div class="avgrund-cover"></div>
+</template>
 
 <template name="filter">
 	<div class="textFilterDiv">
@@ -27,16 +40,11 @@
 	</div>
 </template>
 
-<template name="tweet">
-
-</template>
-
 <template name="container">
-
 	<div id="container">
 		{{#each blocks}}
 		{{> block}}
-		{{/each}}
+		{{/each}}		
 	</div>
 </template>
 
@@ -94,7 +102,14 @@
 			<div>
 				<span> Added at:{{dateAdded}} </span> 
 			</div>
-		{{/if}}	
+		{{/if}}			
 	</div>
 
+</template>
+
+<template name="Popup">	
+	<aside id="default-popup" class="avgrund-popup">
+			{{> block values}}
+			<button class="close">Close</button>
+	</aside>
 </template>

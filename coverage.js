@@ -5,10 +5,8 @@ if (Meteor.isClient) {
   var container = {};
   //Session.set("EditTextMode", false);
   Session.set("selectedToTextEditId", "");
-
-  Template.container.rendered = function () {     
-    container = $(this.find("#container"));   
-  }
+  Session.set('openPopup', false);
+ 
   Template.container.rendered = function () {
      
     container = $(this.find("#container"));
@@ -25,11 +23,19 @@ if (Meteor.isClient) {
 					$('input#textfilter').trigger($.Event('keyup'));
 				}
         });
-}
+	}
+  Template.page.helpers({    
+    ShowPopup: function(){
+      return Session.get('openPopup'); 
+    }
+  });     
 
-  Template.container.blocks = function () {    
-    return Blocks.find();
-  }; 
+  Template.page.events = {
+    'click .avgrund-cover': function (event) {
+        $().Avgrund.hide();
+        Session.set('openPopup', false);
+    }
+  }
 
   Template.block.rendered = function () {
     var items = container.find(".item");
@@ -158,9 +164,7 @@ if (Meteor.isClient) {
 
     updateFullText(blockname,value);
     Session.set("selectedToEditId", "");
-  },
-  
-
+  }, 
   'keypress input': function(event) {
       if (event.charCode == 13) {
           var blockname = event.currentTarget.parentElement.parentElement.parentElement.children["value"].innerText;
@@ -168,6 +172,10 @@ if (Meteor.isClient) {
 
           updateTag(blockname,value);
       }
+  },
+  'click .item' : function(event) {
+      Session.set('selectedData', this);
+      Session.set('openPopup', true);
   }
   
   }); 
@@ -177,11 +185,31 @@ if (Meteor.isClient) {
     container.isotope({sortBy: "number"});
   }
 
-   Template.filter.helpers({
+  Template.filter.helpers({
     FiltersHelper: function() {
       return Filters.find({},{sort : {tag : 1}});
     }
   }); 
+
+  Template.Popup.events({
+  'click .close': function (event) {
+    $().Avgrund.hide();
+    Session.set('openPopup', false);
+  }  
+  }); 
+
+  Template.Popup.rendered = function () {     
+    var openPopup = Session.get('openPopup');
+
+    if(openPopup)
+      $().Avgrund.show( "#default-popup" );
+    else
+      $().Avgrund.hide();
+  }
+
+  Template.Popup.values = function () {  
+    return Session.get('selectedData');
+  };
  }
 
 if (Meteor.isServer) { 
@@ -278,4 +306,6 @@ function checkTwitter(url, id){
     }
 
 }
+
+
   

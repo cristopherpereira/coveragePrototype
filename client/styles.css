@@ -1,0 +1,37 @@
+/*!
+ * avgrund 0.1
+ * http://lab.hakim.se/avgrund
+ * MIT licensed
+ *
+ * Created by Hakim El Hattab, http://hakim.se
+ */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	background-color: #222;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=);
+	background-repeat: repeat;
+}
+
+
+small {
+	display: block;
+	margin-top: 15px;
+	padding-top: 15px;
+	color: #333;
+	font-size: 0.85em;
+	border-top: 1px dashed #ccc;
+
+	-webkit-text-size-adjust: none;
+}
+
+
+
+.sharing {
+	margin-top: 50px;
+}
+

@@ -1,24 +1,51 @@
 /* CSS declarations go here */
-.block {
-	background-color: rgb(255, 255, 255);
-	font-family: 'Helvetica Neue', Arial, sans-serif;
-	border: 2px solid black;
-	padding-top: 15px;
-	font-size: 10px;
-	text-align: center;
-	max-width: 300px;
-	min-width: 300px; 
-	margin: 10px; 
-	-moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -khtml-border-radius: 20px;
-    border-radius: 20px;
+.avgrund-contents {
+  	.block {
+    	background-color: rgb(255, 255, 255);
+    	font-family: 'Helvetica Neue', Arial, sans-serif;
+    	border: 2px solid black;
+    	padding-top: 15px;
+    	font-size: 10px;
+    	text-align: center;
+    	max-width: 300px;
+    	min-width: 300px; 
+    	margin: 10px; 
+    	-moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -khtml-border-radius: 20px;
+        border-radius: 20px;
 
-  transition: width 1s;
-  -moz-transition: width 1s; /* Firefox 4 */
-  -webkit-transition: width 1s; /* Safari and Chrome */
-  -o-transition: width 1s; /* Opera */
-  -ms-transition: width 1s; /* IE9 (maybe) */
+      transition: width 1s;
+      -moz-transition: width 1s; /* Firefox 4 */
+      -webkit-transition: width 1s; /* Safari and Chrome */
+      -o-transition: width 1s; /* Opera */
+      -ms-transition: width 1s; /* IE9 (maybe) */
+    }
+}
+
+.default-popup{
+ .block { 
+    background-color: rgb(255, 255, 255);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      border: 2px solid black;
+      padding-top: 15px;
+      font-size: 10px;
+      text-align: center;
+     
+      margin: 10px; 
+      -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -khtml-border-radius: 20px;
+        border-radius: 20px;
+
+      transition: width 1s;
+      -moz-transition: width 1s; /* Firefox 4 */
+      -webkit-transition: width 1s; /* Safari and Chrome */
+      -o-transition: width 1s; /* Opera */
+      -ms-transition: width 1s; /* IE9 (maybe) */
+    max-width: auto;
+    min-width: auto;    
+  }
 }
 
 .block:hover {

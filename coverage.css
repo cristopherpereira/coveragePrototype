@@ -22,7 +22,9 @@
   font-weight:bold;
 }
 
-
+.imgBox{
+	margin: 10px
+}
 body {
 
   margin: 30px;

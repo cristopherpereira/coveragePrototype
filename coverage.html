@@ -41,7 +41,9 @@
 		</div>
 		<div>
 			{{#if IsImage linkType img}}
-				<img class="image" src="{{img}}">
+				<div class="imgBox">
+					<img class="image" src="{{img}}">
+				</div>
 			{{else}}	
 				{{#if IsVideo linkType img}}
 					<iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/{{img}}" allowfullscreen frameborder="0"></iframe>

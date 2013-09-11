@@ -57,7 +57,9 @@ if (Meteor.isClient) {
         container.isotope({
           itemSelector : '.item',
            masonry: {
-            cornerStampSelector: '.corner-stamp'
+		   columnWidth: 120,
+           cornerStampSelector: '.corner-stamp'
+			
           },
           getSortData : {
             number : function( $elem ) {

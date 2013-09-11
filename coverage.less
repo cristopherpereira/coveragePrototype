@@ -9,34 +9,6 @@
 	max-width: 300px;
 	min-width: 300px; 
 	margin: 10px; 
-	-moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -khtml-border-radius: 20px;
-    border-radius: 20px;
-
-  transition: width 1s;
-  -moz-transition: width 1s; /* Firefox 4 */
-  -webkit-transition: width 1s; /* Safari and Chrome */
-  -o-transition: width 1s; /* Opera */
-  -ms-transition: width 1s; /* IE9 (maybe) */
-}
-
-.block:hover {
-    border: none;
-    background:#bbb;
-    box-shadow: 0px 0px 1px #777;
-}
-
-.image {
-  -webkit-transform: scale(1);
-  -webkit-transition-timing-function: ease-out;
-  -webkit-transition-duration: 50ms;
-}
-
-.image:hover {
-  -webkit-transform: scale(1.05);
-  -webkit-transition-timing-function: ease-out;
-  -webkit-transition-duration: 50ms;
 }
 
 .block .title {
@@ -49,17 +21,23 @@
   font-weight:bold;
 }
 
-.youtube-player{
-  width: 95%;
-}
-
 .imgBox{
-	margin: 25px;
+	margin: 10px
 }
-
 body {
-	background: #E0E0E0;
-	margin: 30px;
+
+  margin: 30px;
+  .header {
+    background-color: white;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+  }
+
+  h1 {
+    text-align: center;
+  }
 }
 
 #container {
@@ -130,8 +108,8 @@ body {
     font-size: 20px;
     text-decoration: none;
     cursor: poiner;
-    border:none;
-    margin-bottom: 10px;
+     border:none;
+     margin-bottom: 10px;
 }
 .filtertag.selected {
   background-color: #aaa;
@@ -144,4 +122,24 @@ body {
     background:#bbb;
     box-shadow: 0px 0px 1px #777;
 
+}
+
+
+.addnewkey {
+  .buttonDiv {
+    clear:left;
+    float: left;
+  }
+  .formDiv {
+  }
+}
+
+.textFilterDiv {
+  float: left;
+  width: 370px;
+  clear:left;
+}
+
+.tagsFilterDiv {
+  margin-left: 400px;
 }

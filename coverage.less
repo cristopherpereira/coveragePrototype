@@ -21,6 +21,16 @@
       -o-transition: width 1s; /* Opera */
       -ms-transition: width 1s; /* IE9 (maybe) */
     }
+    .block:hover {
+        border: none;
+        background:#bbb;
+        box-shadow: 0px 0px 1px #777;
+    }
+    .image:hover {
+      -webkit-transform: scale(1.05);
+      -webkit-transition-timing-function: ease-out;
+      -webkit-transition-duration: 50ms;
+    }
 }
 
 .avgrund-popup {
@@ -48,20 +58,8 @@
   }
 }
 
-.block:hover {
-    border: none;
-    background:#bbb;
-    box-shadow: 0px 0px 1px #777;
-}
-
 .image {
   -webkit-transform: scale(1);
-  -webkit-transition-timing-function: ease-out;
-  -webkit-transition-duration: 50ms;
-}
-
-.image:hover {
-  -webkit-transform: scale(1.05);
   -webkit-transition-timing-function: ease-out;
   -webkit-transition-duration: 50ms;
 }

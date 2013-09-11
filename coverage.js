@@ -173,7 +173,7 @@ if (Meteor.isClient) {
           updateTag(blockname,value);
       }
   },
-  'click .item' : function(event) {
+  'click .image' : function(event) {
       Session.set('selectedData', this);
       Session.set('openPopup', true);
   }

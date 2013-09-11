@@ -9,6 +9,10 @@
 	max-width: 300px;
 	min-width: 300px; 
 	margin: 10px; 
+	-moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
 }
 
 .block .title {
@@ -25,8 +29,8 @@
 	margin: 10px
 }
 body {
-
-  margin: 30px;
+	background: #E0E0E0;
+	margin: 30px;
 }
 
 #container {
@@ -97,8 +101,8 @@ body {
     font-size: 20px;
     text-decoration: none;
     cursor: poiner;
-     border:none;
-     margin-bottom: 10px;
+    border:none;
+    margin-bottom: 10px;
 }
 .filtertag.selected {
   background-color: #aaa;

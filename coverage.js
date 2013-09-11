@@ -114,8 +114,8 @@ if (Meteor.isClient) {
           $("#" + this._id).addClass(myStringArray[i]);
       }
     },
-    IsImage: function(type){
-      if(type == 'image')
+    IsImage: function(type, img){
+      if(type == 'image' && img != undefined && img != '')
         return true;
       else
         return false;

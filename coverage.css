@@ -6,11 +6,9 @@
 	padding-top: 15px;
 	font-size: 10px;
 	text-align: center;
-
 	max-width: 300px;
-  min-width: 300px; 
-  margin: 10px;
-  
+	min-width: 300px; 
+	margin: 10px; 
 }
 
 .block .title {

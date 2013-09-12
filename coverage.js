@@ -188,7 +188,6 @@ if (Meteor.isClient) {
 
   Template.Popup.events({
   'click .close': function (event) {
-    debugger;
     $().Avgrund.hide();
     Session.set('openPopup', false);
     $(this.find("#container")).removeClass('avgrund-active' );
@@ -197,7 +196,6 @@ if (Meteor.isClient) {
 
   Template.Popup.rendered = function () {     
     var openPopup = Deps.nonreactive(function () { return Session.get('openPopup'); });
-debugger;
     if(openPopup) {
       $().Avgrund.show( "#default-popup" );
       
@@ -271,12 +269,10 @@ function updateTag(blockname,value){
     container.find('input#textTag').each(function() {
         $(this).val('');
     });
-    debugger;
     if(Session.get('openPopup'))
     {
       $("#default-popup").find('input#textTag').each(function() {
         var values = Deps.nonreactive(function () { return Session.get('selectedData'); });
-        //var values = Session.get('selectedData');
         if(!values.tags)
         {
           values.tags=[];
@@ -293,13 +289,22 @@ function updateTag(blockname,value){
 }
 function updateFullText(blockname,value){
    if(value != ""){   
-     Meteor.call('updateBlockFullText', blockname, value , function(err,response) {
-      if(err) {
-        Session.set('serverDataResponse', "Error:" + err.reason);
-        return;
+       Meteor.call('updateBlockFullText', blockname, value , function(err,response) {
+        if(err) {
+          Session.set('serverDataResponse', "Error:" + err.reason);
+          return;
+        }
+        Session.set('serverDataResponse', response);
+      });
+      if(Session.get('openPopup'))
+      {
+        var values = Deps.nonreactive(function () { return Session.get('selectedData'); });
+        if(values.text != value)
+        {
+          values.text=value;
+          Session.set('selectedData',values);
+        }
       }
-      Session.set('serverDataResponse', response);
-    });
     }
 
 }

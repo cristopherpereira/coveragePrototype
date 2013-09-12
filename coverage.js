@@ -194,7 +194,7 @@ if (Meteor.isClient) {
   }); 
 
   Template.Popup.rendered = function () {     
-    var openPopup = Session.get('openPopup');
+    var openPopup = Deps.nonreactive(function () { return Session.get('openPopup'); });
 
     if(openPopup){
       $().Avgrund.show( "#default-popup" );
@@ -299,7 +299,9 @@ function checkTwitter(url, id){
         Session.set('serverDataResponse', response);
       });  
 
-      if(!Session.get('openPopup')){
+      var nonReactiveOpenPopup = Deps.nonreactive(function () { return Session.get('openPopup'); });
+
+      if(!nonReactiveOpenPopup){
         setTimeout( function() {
           container.isotope('reloadItems').isotope(); 
         }, 10000 );    

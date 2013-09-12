@@ -47,19 +47,14 @@ if (Meteor.isClient) {
           $("#" + this.data._id).addClass(myStringArray[i]);
       }
     }
-    // console.log("Running rendered for container with " + items.length + " blocks");
-    if ((!container.hasClass("isotope")) && (items.length == Blocks.find().count())) {
-      // This seems to run once per block. Wasteful.
-      // console.log("Initialize isotope");
-      // Initialize isotope
-     
+    
+    if ((!container.hasClass("isotope")) && (items.length == Blocks.find().count())) {           
         container.imagesLoaded( function(){
         container.isotope({
           itemSelector : '.item',
            masonry: {
-		   columnWidth: 120,
-           cornerStampSelector: '.corner-stamp'
-			
+  		       columnWidth: 120,
+             cornerStampSelector: '.corner-stamp'			
           },
           getSortData : {
             number : function( $elem ) {
@@ -67,10 +62,9 @@ if (Meteor.isClient) {
             }
           }
         });
-        });
-     
+        });    
     
-      container.isotope({sortBy: "number"});
+      container.isotope({sortBy: "number"}).isotope();
     } else if (container.hasClass("isotope")) {
       console.log("Updating isotope");
       container.imagesLoaded( function(){
@@ -78,10 +72,7 @@ if (Meteor.isClient) {
                 container.isotope();
             });
       });
-
-    }
-
-    
+    }  
   }
 
   Template.filter.events = {
@@ -221,9 +212,6 @@ if (Meteor.isClient) {
  }
 
 if (Meteor.isServer) { 
-
-
-
    Meteor.startup(function () {
     Meteor.methods({
 		checkTwitter: function (url) {
@@ -297,22 +285,26 @@ function updateFullText(blockname,value){
 }
 
 function checkTwitter(url, id){
-   if(url != ""){   
-   
+   if(url != ""){     
      Meteor.call('checkTwitter', url , function(err,response) {
       if(err) {
         Session.set('serverDataResponse', "Error:" + err.reason);
         return;
       }
-	  var xml = response.content;
-	  var xmlDoc = $.parseXML( xml );
-	  var $xml = $( xmlDoc );
-	  var $html = $xml.find("html").text();
-	  $("#" + id + " #tweet").html($html);
-      Session.set('serverDataResponse', response);
-    });
-    }
+  	  var xml = response.content;
+  	  var xmlDoc = $.parseXML( xml );
+  	  var $xml = $( xmlDoc );
+  	  var $html = $xml.find("html").text();
+  	  $("#" + id + " #tweet").html($html);
+        Session.set('serverDataResponse', response);
+      });  
 
+      if(!Session.get('openPopup')){
+        setTimeout( function() {
+          container.isotope('reloadItems').isotope(); 
+        }, 10000 );    
+      }
+    }
 }
 
 

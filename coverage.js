@@ -188,6 +188,7 @@ if (Meteor.isClient) {
 
   Template.Popup.events({
   'click .close': function (event) {
+    debugger;
     $().Avgrund.hide();
     Session.set('openPopup', false);
   }  
@@ -220,7 +221,7 @@ if (Meteor.isServer) {
 				return Meteor.http.call('GET', 'https://api.twitter.com/1/statuses/oembed.xml?url='+url);
 			},
       updateblock: function (blockname, value) {
-       Blocks.update({ _id: blockname }, { $push: { tags: value } });
+       Blocks.update({ _id: blockname }, { $addToSet: { tags: value } });
        var tag = Filters.find({tag : value}).fetch();
 
        if(tag.length == 0){
@@ -269,6 +270,24 @@ function updateTag(blockname,value){
     container.find('input#textTag').each(function() {
         $(this).val('');
     });
+    debugger;
+    if(Session.get('openPopup'))
+    {
+      $("#default-popup").find('input#textTag').each(function() {
+        var values = Deps.nonreactive(function () { return Session.get('selectedData'); });
+        //var values = Session.get('selectedData');
+        if(!values.tags)
+        {
+          values.tags=[];
+        } 
+        if (values.tags.indexOf($(this).val())==-1)
+        {
+          values.tags.push($(this).val());
+          Session.set('selectedData',values);
+        }
+        $(this).val('');
+      });
+    }
 
 }
 function updateFullText(blockname,value){

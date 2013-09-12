@@ -121,15 +121,15 @@ if (Meteor.isClient) {
       else
         return false;
     },
-	IsTweet: function(type, url){
-		if(type == 'tweet'&& url != undefined && url != '')
-			return true;
-		else
-			return false;
-	},
-	LoadTweet: function(url){
-		checkTwitter(this.img,this._id);		
-	}
+  	IsTweet: function(type, url){
+  		if(type == 'tweet'&& url != undefined && url != '')
+  			return true;
+  		else
+  			return false;
+  	},
+  	LoadTweet: function(url){
+  		checkTwitter(this.img,this._id);		
+  	}
   });    
   
   Template.block.events({
@@ -207,7 +207,7 @@ if (Meteor.isClient) {
   }
 
   Template.Popup.values = function () {  
-    return Session.get('selectedData');
+    return Deps.nonreactive(function () { return Session.get('selectedData'); });
   };
  }
 
@@ -286,26 +286,30 @@ function updateFullText(blockname,value){
 
 function checkTwitter(url, id){
    if(url != ""){     
-     Meteor.call('checkTwitter', url , function(err,response) {
-      if(err) {
-        Session.set('serverDataResponse', "Error:" + err.reason);
-        return;
-      }
-  	  var xml = response.content;
-  	  var xmlDoc = $.parseXML( xml );
-  	  var $xml = $( xmlDoc );
-  	  var $html = $xml.find("html").text();
-  	  $("#" + id + " #tweet").html($html);
+      Meteor.call('checkTwitter', url , function(err,response) {
+        if(err) {
+          Session.set('serverDataResponse', "Error:" + err.reason);
+          return;
+        }
+    	  var xml = response.content;
+    	  var xmlDoc = $.parseXML( xml );
+    	  var $xml = $( xmlDoc );
+    	  var $html = $xml.find("html").text();    	  
         Session.set('serverDataResponse', response);
+
+        var nonReactiveOpenPopup = Deps.nonreactive(function () { return Session.get('openPopup'); });
+
+        if(!nonReactiveOpenPopup){
+          $("#" + id + " #tweet").html($html);
+          setTimeout( function() {
+            container.isotope('reloadItems').isotope(); 
+          }, 10000 );    
+        }
+        else
+        {
+          $("#default-popup #" + id + " #tweet").html($html);
+        }
       });  
-
-      var nonReactiveOpenPopup = Deps.nonreactive(function () { return Session.get('openPopup'); });
-
-      if(!nonReactiveOpenPopup){
-        setTimeout( function() {
-          container.isotope('reloadItems').isotope(); 
-        }, 10000 );    
-      }
     }
 }
 

@@ -40,7 +40,9 @@
 
 		setTimeout( function() {
 			removeClass( popup, 'no-transition' );
-			addClass( container, 'avgrund-active' );
+			
+	      	if(!$("html").hasClass("avgrund-active"))
+	      		addClass( container, 'avgrund-active' );
 		}, 0 );
 
 		currentState = state;

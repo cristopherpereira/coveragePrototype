@@ -191,13 +191,14 @@ if (Meteor.isClient) {
     debugger;
     $().Avgrund.hide();
     Session.set('openPopup', false);
+    $(this.find("#container")).removeClass('avgrund-active' );
   }  
   }); 
 
   Template.Popup.rendered = function () {     
     var openPopup = Deps.nonreactive(function () { return Session.get('openPopup'); });
-
-    if(openPopup){
+debugger;
+    if(openPopup) {
       $().Avgrund.show( "#default-popup" );
       
       var screenTop = $(window).scrollTop();
@@ -208,7 +209,7 @@ if (Meteor.isClient) {
   }
 
   Template.Popup.values = function () {  
-    return Deps.nonreactive(function () { return Session.get('selectedData'); });
+    return Session.get('selectedData');
   };
  }
 

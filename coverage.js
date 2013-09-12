@@ -44,7 +44,7 @@ if (Meteor.isClient) {
     if(myStringArray)
     {
       for (var i = 0; i < myStringArray.length; i++) {
-          $("#" + this.data._id).addClass(myStringArray[i]);
+          $(".avgrund-contents " + "#" + this.data._id).addClass(myStringArray[i]);
       }
     }
     
@@ -82,7 +82,10 @@ if (Meteor.isClient) {
 
     'click .filtertag': function (event) {
       var classname = event.currentTarget.value;
-      classname = '.' + classname.replace(" ", ".");
+      classname = '.' + classname;
+
+      classname = replaceAll(' ', '.', classname);
+
       $(".filtertag").removeClass("selected");
       $(event.currentTarget).addClass("selected");
       Session.set("SearchText", classname);
@@ -182,7 +185,7 @@ if (Meteor.isClient) {
 
   Template.filter.helpers({
     FiltersHelper: function() {
-      return Filters.find({},{sort : {tag : 1}});
+      return Filters.find({},{sort : {searchTag : 1}});
     }
   }); 
 
@@ -224,7 +227,7 @@ if (Meteor.isServer) {
        var tag = Filters.find({tag : value}).fetch();
 
        if(tag.length == 0){
-          Filters.insert({tag : value});
+          Filters.insert({tag : value, searchTag: value.toLowerCase() });
        }
       },
       updateBlockFullText: function (blockname, value) {
@@ -338,5 +341,6 @@ function checkTwitter(url, id){
     }
 }
 
-
-  
+function replaceAll(find, replace, str) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}  

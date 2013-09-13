@@ -105,7 +105,7 @@ if (Meteor.isClient) {
           return $(b)[0].textContent.toLowerCase() > $(a)[0].textContent.toLowerCase() ? -1 : 1;
         }
         return emA > emB ? 1 : -1;           
-      }).appendTo('ul.ft-tags');
+     }).appendTo('ul.ft-tags');
   }  
 
   

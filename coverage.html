@@ -38,6 +38,7 @@
 			<input class="filtertag" name="quicksearch" type="button" value="{{tag}}"/>	
 		{{/each}}
 	</div>
+	<div id="placeHolder"></div>
 </template>
 
 <template name="container">
@@ -49,7 +50,7 @@
 </template>
 
 <template name="block">
-	<div id={{_id}} class="item block quicksearch-match All">
+	<div id={{_id}} data-Tags="{{Tags}}" class="item block quicksearch-match All">
 		<div class="title">
 			{{num}}
 		</div>

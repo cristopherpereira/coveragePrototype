@@ -41,12 +41,12 @@ if (Meteor.isClient) {
     var items = container.find(".item");
 
     var myStringArray = this.data.tags;
-    if(myStringArray)
+    /*if(myStringArray)
     {
       for (var i = 0; i < myStringArray.length; i++) {
           $(".avgrund-contents " + "#" + this.data._id).addClass(myStringArray[i]);
       }
-    }
+    }*/
     
     if ((!container.hasClass("isotope")) && (items.length == Blocks.find().count())) {           
         container.imagesLoaded( function(){
@@ -72,7 +72,15 @@ if (Meteor.isClient) {
                 container.isotope();
             });
       });
-    }  
+    }
+
+     $.filtrify("container", "placeHolder", {
+        hide     : false,
+        callback : function ( query, match, mismatch ) {
+            container.isotope({ filter : $(match) });
+        }
+    });
+  
   }
 
   Template.filter.events = {
@@ -132,7 +140,19 @@ if (Meteor.isClient) {
   	},
   	LoadTweet: function(url){
   		checkTwitter(this.img,this._id);		
-  	}
+  	},
+    Tags: function(url){
+      var tags = [];
+      var myStringArray = this.tags;
+      if(myStringArray)
+      {
+        for (var i = 0; i < myStringArray.length; i++) {
+            tags.push(" " + myStringArray[i]);
+        }
+        return tags;
+      }
+      return [];
+    }
   });    
   
   Template.block.events({

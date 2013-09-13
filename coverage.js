@@ -76,11 +76,16 @@ if (Meteor.isClient) {
 
       var _id = this.data._id;
 
-      $(".avgrund-contents " + "#" + _id).addClass("glow");
+      var nonReactiveOpenPopup = Deps.nonreactive(function () { return Session.get('openPopup'); });
 
-      setTimeout( function() {
-              $(".avgrund-contents " + "#" + _id).removeClass("glow");
-      }, 3000 );
+      if(!nonReactiveOpenPopup)
+      {
+        $(".avgrund-contents " + "#" + _id).addClass("glow");
+
+        setTimeout( function() {
+                $(".avgrund-contents " + "#" + _id).removeClass("glow");
+        }, 3000 );
+      }
     }  
   }
 
@@ -141,7 +146,19 @@ if (Meteor.isClient) {
   	},
   	LoadTweet: function(url){
   		checkTwitter(this.img,this._id);		
-  	}
+  	},
+    Tags: function(url){
+      var tags = [];
+      var myStringArray = this.tags;
+      if(myStringArray)
+      {
+        for (var i = 0; i < myStringArray.length; i++) {
+            tags.push(" " + myStringArray[i]);
+        }
+        return tags;
+      }
+      return [];
+    }
   });    
   
   Template.block.events({

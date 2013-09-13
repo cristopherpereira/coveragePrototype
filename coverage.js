@@ -41,12 +41,12 @@ if (Meteor.isClient) {
     var items = container.find(".item");
 
     var myStringArray = this.data.tags;
-    if(myStringArray)
+    /*if(myStringArray)
     {
       for (var i = 0; i < myStringArray.length; i++) {
           $(".avgrund-contents " + "#" + this.data._id).addClass(myStringArray[i]);
       }
-    }
+    }*/
     
     if ((!container.hasClass("isotope")) && (items.length == Blocks.find().count())) {           
         container.imagesLoaded( function(){
@@ -86,8 +86,29 @@ if (Meteor.isClient) {
                 $(".avgrund-contents " + "#" + _id).removeClass("glow");
         }, 3000 );
       }
-    }  
-  }
+
+    }
+
+     $.filtrify("container", "placeHolder", {
+        hide     : false,
+        callback : function ( query, match, mismatch ) {
+            container.isotope({ filter : $(match) });
+        }
+    });
+
+     $(".ft-label")[0].innerText = "Click to filter by Tags";    
+
+     $( ".ft-tags li" ).sort(function(a, b){
+        var emA = parseInt($(b)[0].attributes['data-count'].value);
+        var emB = parseInt($(a)[0].attributes['data-count'].value);
+        if (emA == emB) { 
+          return $(b)[0].textContent.toLowerCase() > $(a)[0].textContent.toLowerCase() ? -1 : 1;
+        }
+        return emA > emB ? 1 : -1;           
+      }).appendTo('ul.ft-tags');
+  }  
+
+  
 
   Template.filter.events = {
     'keypress  input#textfilter': function (event) {
@@ -153,6 +174,9 @@ if (Meteor.isClient) {
       if(myStringArray)
       {
         for (var i = 0; i < myStringArray.length; i++) {
+          if(i == 0)
+            tags.push(myStringArray[i]);
+          else
             tags.push(" " + myStringArray[i]);
         }
         return tags;

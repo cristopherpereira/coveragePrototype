@@ -161,6 +161,7 @@ ul.ft-menu > li.ft-field > div.ft-panel > fieldset.ft-search:before {
 	position: absolute;
     width: 20px;
 	bottom: 15px;
+	top: 18px;
 	left: 18px;
 	color: #BBB;
 	text-shadow: none;
@@ -181,7 +182,7 @@ ul.ft-menu > li.ft-field > div.ft-panel > fieldset.ft-search > input {
 
 ul.ft-menu > li.ft-field > div.ft-panel > ul.ft-tags { 
 	position: relative !important; 
-	max-height: 200px !important; 
+	max-height: 300px !important; 
 	border-top: 1px solid #33373D;
 	overflow-x: hidden; 
 	overflow-y: auto; 

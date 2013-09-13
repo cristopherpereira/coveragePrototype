@@ -66,12 +66,27 @@ if (Meteor.isClient) {
     
       container.isotope({sortBy: "number"}).isotope();
     } else if (container.hasClass("isotope")) {
+      container.isotope('reloadItems').isotope(); 
       console.log("Updating isotope");
       container.imagesLoaded( function(){
       container.isotope('addItems', $(this.find(".item:not(.isotope-item)")), function() {
                 container.isotope();
             });
       });
+
+      var _id = this.data._id;
+
+      var nonReactiveOpenPopup = Deps.nonreactive(function () { return Session.get('openPopup'); });
+
+      if(!nonReactiveOpenPopup)
+      {
+        $(".avgrund-contents " + "#" + _id).addClass("glow");
+
+        setTimeout( function() {
+                $(".avgrund-contents " + "#" + _id).removeClass("glow");
+        }, 3000 );
+      }
+
     }
 
      $.filtrify("container", "placeHolder", {
@@ -80,8 +95,20 @@ if (Meteor.isClient) {
             container.isotope({ filter : $(match) });
         }
     });
+
+     $(".ft-label")[0].innerText = "Click to filter by Tags";    
+
+     $( ".ft-tags li" ).sort(function(a, b){
+        var emA = parseInt($(b)[0].attributes['data-count'].value);
+        var emB = parseInt($(a)[0].attributes['data-count'].value);
+        if (emA == emB) { 
+          return $(b)[0].textContent.toLowerCase() > $(a)[0].textContent.toLowerCase() ? -1 : 1;
+        }
+        return emA > emB ? 1 : -1;           
+      }).appendTo('ul.ft-tags');
+  }  
+
   
-  }
 
   Template.filter.events = {
     'keypress  input#textfilter': function (event) {
@@ -147,6 +174,9 @@ if (Meteor.isClient) {
       if(myStringArray)
       {
         for (var i = 0; i < myStringArray.length; i++) {
+          if(i == 0)
+            tags.push(myStringArray[i]);
+          else
             tags.push(" " + myStringArray[i]);
         }
         return tags;

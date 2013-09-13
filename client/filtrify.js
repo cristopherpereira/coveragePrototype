@@ -213,11 +213,28 @@
 		this._menu[f].tags.on( "click", "li", this._bind(function(){
 			this.select( f );
 			this.filter();
+			$( ".ft-tags li" ).sort(function(a, b){
+			  var emA = parseInt($(b)[0].attributes['data-count'].value);
+			  var emB = parseInt($(a)[0].attributes['data-count'].value);
+			  if (emA == emB) { 
+			    return $(b)[0].textContent.toLowerCase() > $(a)[0].textContent.toLowerCase() ? -1 : 1;
+			  }
+			  return emA > emB ? 1 : -1;		       
+		    }).appendTo('ul.ft-tags');
+
 		}, this) );
 
 		this._menu[f].selected.on( "click", "li", this._bind(function(event){
 			this.unselect( f, $( event.target ).text() );
 			this.filter();
+			$( ".ft-tags li" ).sort(function(a, b){
+			  var emA = parseInt($(b)[0].attributes['data-count'].value);
+			  var emB = parseInt($(a)[0].attributes['data-count'].value);
+			  if (emA == emB) { 
+			    return $(b)[0].textContent.toLowerCase() > $(a)[0].textContent.toLowerCase() ? -1 : 1;
+			  }
+			  return emA > emB ? 1 : -1;		       
+		    }).appendTo('ul.ft-tags');
 		}, this) );
 
 	};

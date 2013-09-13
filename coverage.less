@@ -1,7 +1,7 @@
 /* CSS declarations go here */
 .avgrund-contents {
   	.block {
-    	background-color: rgb(255, 255, 255);
+    	background-color: white;
     	font-family: 'Helvetica Neue', Arial, sans-serif;
     	border: 2px solid black;
     	padding-top: 15px;
@@ -35,6 +35,9 @@
     }
     .Fulltext {
       margin: 10px
+    }
+    .glow {
+      -webkit-animation:myfirst 3s;
     }
 }
 #tweet {
@@ -92,6 +95,10 @@
   font-weight:bold;
 }
 
+.block .tagContent {
+  margin: 5px;
+}
+
 .youtube-player{
   width: 95%;
 }
@@ -121,20 +128,29 @@ body {
       }
     }
 
-    .textFilterDiv {
-      float: left;
-      width: 370px;
+    .textFilterDiv {  
       clear:left;
     }
 
     .tagsFilterDiv {
-      margin-left: 400px;
+      float: right;
+      -webkit-transform: scale(1.5);
+      padding-right: 2%;
+      z-index: 2;
+      position: relative;
     }
   }
 
   h1 {
     text-align: center;
   }
+}
+
+@-webkit-keyframes myfirst
+{
+  0%   {background:white;}
+  50% {background:Palegreen;}
+  100% {background:white;}
 }
 
 #container {

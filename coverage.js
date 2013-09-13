@@ -66,12 +66,21 @@ if (Meteor.isClient) {
     
       container.isotope({sortBy: "number"}).isotope();
     } else if (container.hasClass("isotope")) {
+      container.isotope('reloadItems').isotope(); 
       console.log("Updating isotope");
       container.imagesLoaded( function(){
       container.isotope('addItems', $(this.find(".item:not(.isotope-item)")), function() {
                 container.isotope();
             });
       });
+
+      var _id = this.data._id;
+
+      $(".avgrund-contents " + "#" + _id).addClass("glow");
+
+      setTimeout( function() {
+              $(".avgrund-contents " + "#" + _id).removeClass("glow");
+      }, 3000 );
     }  
   }
 

@@ -49,7 +49,7 @@
 </template>
 
 <template name="block">
-	<div id={{_id}} class="item block quicksearch-match All">
+	<div id={{_id}} class="item block quicksearch-match All isotope-item">
 		<div class="title">
 			{{num}}
 		</div>
@@ -89,7 +89,8 @@
 		<div>
 			{{#isolate}}
 				{{#if tags}}
-				<div class="tagTitle">Tags </div> {{tags}} 
+				<div class="tagTitle">Tags </div> 
+				<div>{{tags}}</div> 
 				{{/if}}
 				
 				<div class="addnewtag">			

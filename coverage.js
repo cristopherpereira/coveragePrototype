@@ -197,7 +197,6 @@ if (Meteor.isClient) {
   
   'click .remove':function (event){
 	var blockname = event.currentTarget.parentElement.parentElement.id;
-	debugger;
 	removeBlock(blockname);
   },
     //Triggers when the add tag is clicked on a block
@@ -410,7 +409,6 @@ function replaceAll(find, replace, str) {
 }  
 
 function removeBlock(blockname){
-debugger;
 	if(blockname != ""){   
 		   Meteor.call('removeBlock', blockname, function(err,response) {
 			if(err) {

@@ -282,12 +282,7 @@ if (Meteor.isServer) {
 				return Meteor.http.call('GET', 'https://api.twitter.com/1/statuses/oembed.xml?url='+url);
 			}, 
       updateblock: function (blockname, value) {
-       Blocks.update({ _id: blockname }, { $addToSet: { tags: value } });
-       var tag = Filters.find({tag : value}).fetch();
-
-       if(tag.length == 0){
-          Filters.insert({tag : value, searchTag: value.toLowerCase() });
-       }
+       Blocks.update({ _id: blockname }, { $addToSet: { tags: value } });       
       },     
       updateBlockFullText: function (blockname, value) {
        Blocks.update({ _id: blockname }, { $set: { text: value } });

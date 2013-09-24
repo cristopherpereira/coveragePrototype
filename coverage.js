@@ -194,6 +194,12 @@ if (Meteor.isClient) {
   });    
   
   Template.block.events({
+  
+  'click .remove':function (event){
+	var blockname = event.currentTarget.parentElement.parentElement.id;
+	debugger;
+	removeBlock(blockname);
+  },
     //Triggers when the add tag is clicked on a block
     'click .addnewtag .add': function (event) {
         var blockname = event.currentTarget.parentElement.parentElement.parentElement.id;
@@ -286,7 +292,10 @@ if (Meteor.isServer) {
       },     
       updateBlockFullText: function (blockname, value) {
        Blocks.update({ _id: blockname }, { $set: { text: value } });
-      }
+      },
+	  removeBlock: function(blockname){
+		Blocks.remove({ _id: blockname });
+	  }
     });
   });
 }
@@ -343,7 +352,6 @@ function updateTag(blockname,value){
         $(this).val('');
       });
     }
-
 }
 function updateFullText(blockname,value){
    if(value != ""){   
@@ -400,3 +408,17 @@ function checkTwitter(url, id){
 function replaceAll(find, replace, str) {
   return str.replace(new RegExp(find, 'g'), replace);
 }  
+
+function removeBlock(blockname){
+debugger;
+	if(blockname != ""){   
+		   Meteor.call('removeBlock', blockname, function(err,response) {
+			if(err) {
+			  Session.set('serverDataResponse', "Error:" + err.reason);
+			  return;
+			}
+			Session.set('serverDataResponse', response);
+		  });
+
+	}
+}

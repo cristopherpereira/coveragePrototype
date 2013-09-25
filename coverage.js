@@ -1,4 +1,5 @@
 Blocks = new Meteor.Collection("blocks");
+Order = new Meteor.Collection("order");
 
 //Meteor Client operates on the browser side
 if (Meteor.isClient) {
@@ -140,7 +141,7 @@ if (Meteor.isClient) {
   }
 
   //This function triggers when the page is reloaded or there are new, updated or deleted data on the mongo collection
-  Template.container.blocks = function () {  
+  Template.container.blocks = function () {      
     return Blocks.find({},{sort : {num : 1}});
   };
 
@@ -190,6 +191,22 @@ if (Meteor.isClient) {
         return tags;
       }
       return [];
+    },
+    //Gets all the Orders from Orders collections that match the block ID
+    GetOrder: function(id){
+      var order = [];
+      var myStringArray =  Order.findOne({ id : id});
+      if(myStringArray)
+      {
+        for (var i = 0; i < myStringArray.Order.length; i++) {
+          if(i == 0)
+            order.push(myStringArray.Order[i]);
+          else
+            order.push(" " + myStringArray.Order[i]);
+        }
+        return order;
+      }
+      return [];
     }
   });    
   
@@ -205,6 +222,12 @@ if (Meteor.isClient) {
         var value = event.currentTarget.parentElement.children["textTag"].value;
 
         updateTag(blockname, value);
+    },
+    'click .addneworder .addOrder': function (event) {
+        var blockname = event.currentTarget.parentElement.parentElement.parentElement.id;
+        var value = event.currentTarget.parentElement.children["textOrder"].value;
+
+        updateOrder(blockname, value);
     },
     //Triggers when edit text is clicked on a block
     'click .editText': function (event) {
@@ -288,6 +311,18 @@ if (Meteor.isServer) {
 			}, 
       updateblock: function (blockname, value) {
        Blocks.update({ _id: blockname }, { $addToSet: { tags: value } });       
+      },
+      updateOrder: function (blockname, value) {       
+
+       var order = Order.find({ id: blockname }).fetch();
+
+       if(order.length == 0){
+          var orderArray = [];
+          orderArray.push(value);
+          Order.insert({ id: blockname, Order : orderArray });
+       }else{
+          Order.update({ id: blockname }, { $addToSet: { Order: value } }); 
+       }      
       },     
       updateBlockFullText: function (blockname, value) {
        Blocks.update({ _id: blockname }, { $set: { text: value } });
@@ -351,6 +386,38 @@ function updateTag(blockname,value){
         $(this).val('');
       });
     }
+}
+function updateOrder(blockname,value){
+   if(value != ""){   
+     Meteor.call('updateOrder', blockname, value , function(err,response) {
+      if(err) {
+        Session.set('serverDataResponse', "Error:" + err.reason);
+        return;
+      }
+      Session.set('serverDataResponse', response);
+    });
+    }
+
+    container.find('input#textOrder').each(function() {
+        $(this).val('');
+    });
+    /*var nonReactiveOpenPopup = Deps.nonreactive(function () { return Session.get('openPopup'); });
+    if(nonReactiveOpenPopup)
+    {
+      $("#default-popup").find('input#textTag').each(function() {
+        var values = Deps.nonreactive(function () { return Session.get('selectedData'); });
+        if(!values.tags)
+        {
+          values.tags=[];
+        } 
+        if (values.tags.indexOf($(this).val())==-1)
+        {
+          values.tags.push($(this).val());
+          Session.set('selectedData',values);
+        }
+        $(this).val('');
+      });
+    }*/
 }
 function updateFullText(blockname,value){
    if(value != ""){   

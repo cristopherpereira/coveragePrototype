@@ -95,6 +95,23 @@
 				</div>
 			{{/isolate}}
 		</div>
+
+		<div>
+			{{#isolate}}
+				{{#if GetOrder _id}}
+					<div class="tagTitle">Orders Collection </div> 
+					<div class="tagContent">
+						{{GetOrder _id}}
+					</div> 
+				{{/if}}
+
+				<div class="addneworder">			
+					<input id="textOrder" type="text" placeholder="Add Order"/>
+					<input type="image" src="../../Add.png" class="addOrder" alt="Add">
+				</div>
+				
+			{{/isolate}}
+		</div>
 		{{#if dateAdded}}
 			<div>
 				<span> Added at:{{dateAdded}} </span> 		

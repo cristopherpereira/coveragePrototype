@@ -1,11 +1,11 @@
 /* icons font-face */
 @font-face {
     font-family: "FiltrifyRegular";
-    src: url("../font/filtrify/filtrify-webfont.eot");
-    src: url("../font/filtrify/filtrify-webfont.eot?#iefix") format("embedded-opentype"),
-         url("../font/filtrify/filtrify-webfont.woff") format("woff"),
-         url("../font/filtrify/filtrify-webfont.ttf") format("truetype"),
-         url("../font/filtrify/filtrify-webfont.svg#FiltrifyRegular") format("svg");
+    src: url("../../font/filtrify/filtrify-webfont.eot");
+    src: url("../../font/filtrify/filtrify-webfont.eot?#iefix") format("embedded-opentype"),
+         url("../../font/filtrify/filtrify-webfont.woff") format("woff"),
+         url("../../font/filtrify/filtrify-webfont.ttf") format("truetype"),
+         url("../../font/filtrify/filtrify-webfont.svg#FiltrifyRegular") format("svg");
     font-weight: normal;
     font-style: normal;
 }

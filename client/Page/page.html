@@ -1,0 +1,17 @@
+<template name="page">
+	{{#isolate}}
+		{{#if ShowPopup}}
+			{{> Popup}}
+		{{/if}}	
+	{{/isolate}}
+
+	<div class="avgrund-contents">
+		<h1>Coverage Prototype</h1>	
+		<div class="header">
+			{{> addNewsItemContentPanel}}
+			{{> filter}}
+		</div>
+  		{{> container}} 
+	 </div>
+	 <div class="avgrund-cover"></div>
+</template>

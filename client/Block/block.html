@@ -1,0 +1,77 @@
+<template name="block">
+	<div id={{_id}} data-Tags="{{Tags}}" class="item block quicksearch-match All isotope-item {{sex}}">
+		<div class="title">
+			{{num}}
+		</div>
+		<div>
+			{{#if IsImage linkType img}}
+				<div class="imgBox">
+					<img class="image" src="{{img}}">
+				</div>
+			{{else}}	
+				{{#if IsVideo linkType img}}
+					<div class="imgBox">
+						<iframe class="youtube-player" type="text/html" src="http://www.youtube.com/embed/{{img}}" allowfullscreen frameborder="0"></iframe>
+					</div>
+				{{else}}
+					{{#if IsTweet linkType img}}
+						<div id="tweet">
+							{{LoadTweet}}
+						</div>
+					{{/if}}
+				{{/if}}
+
+			{{/if}}
+		</div>
+		<div class="Fulltext">
+			{{#isolate}}
+				{{#if EditTextMode _id}}
+					<textarea id="fullTextEdit" rows="4" placeholder="Edit Text">{{text}}</textarea>
+					<input type="image" src="../../Save.png" class="add" alt="Add">
+					<input type="image" src="../../Cancel.png" class="cancel" alt="Cancel">
+				{{else}}				
+					{{text}}
+					<input type="image" src="../../Edit.png" class="editText" alt="Edit">
+				{{/if}}
+			{{/isolate}}
+		</div>
+		<br/>
+		<div>
+			{{#isolate}}
+				{{#if tags}}
+				<div class="tagTitle">Tags </div> 
+				<div class="tagContent">{{Tags}}</div> 
+				{{/if}}
+				
+				<div class="addnewtag">			
+					<input id="textTag" type="text" placeholder="Add Tag"/>
+					<input type="image" src="../../Add.png" class="add" alt="Add">
+				</div>
+			{{/isolate}}
+		</div>
+
+		<div>
+			{{#isolate}}
+				{{#if GetOrder _id}}
+					<div class="tagTitle">Orders Collection </div> 
+					<div class="tagContent">
+						{{GetOrder _id}}
+					</div> 
+				{{/if}}
+
+				<div class="addneworder">			
+					<input id="textOrder" type="text" placeholder="Add Order"/>
+					<input type="image" src="../../Add.png" class="addOrder" alt="Add">
+				</div>
+				
+			{{/isolate}}
+		</div>
+		{{#if dateAdded}}
+			<div>
+				<span> Added at:{{dateAdded}} </span> 		
+					<input type="image" src="../../trash_can.png" class="remove" alt="Remove">
+			</div>
+		{{/if}}			
+	</div>
+
+</template>

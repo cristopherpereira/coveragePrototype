@@ -9,7 +9,7 @@ Template.addNewNewsItemFormTemplate.events({
 	var numVal = $(".num",event.target.parentNode.parentElement).val();
 	var imgVal = $(".img",event.target.parentNode.parentElement).val();
 	var linkType = $("#linkType",event.target.parentNode.parentElement).val();
-
+	var sex = $("#sex",event.target.parentNode.parentElement).val();
 	if(linkType == "video"){	
 		if(imgVal != undefined && imgVal != ''){
 			var video_id = imgVal.split('v=')[1];
@@ -35,7 +35,8 @@ Template.addNewNewsItemFormTemplate.events({
             img: imgVal,
 			dateAdded: month+"/"+day+"/"+year,
             text: fullVal,
-            linkType: linkType
+            linkType: linkType,
+            sex: sex
           });
 
 		Session.set("addingNewNewsItem",false);

@@ -20,11 +20,12 @@ if (Meteor.isClient) {
 		            itemSelector: '.item',
 		            masonry: {
 		                columnWidth: 120,
+		                gutterWidth: 20,
 		                cornerStampSelector: '.corner-stamp'
 		            },
 		            getSortData: {
 		                name: function ($elem) {
-		                    return $elem.find('.title').text();
+		                    return $elem.find('.title')[0].innerText;
 		                }
 		            }
 		        });

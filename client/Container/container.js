@@ -13,7 +13,7 @@ if (Meteor.isClient) {
             $('input#textfilter').val($("#StartDate").val());
             jQuery.fn.keypressFilter();
         }
-    });
+    });    
   }   
 
   //This function triggers when the page is reloaded or there are new, updated or deleted data on the mongo collection

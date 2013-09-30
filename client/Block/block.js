@@ -17,18 +17,14 @@ if (Meteor.isClient) {
 
 		        //Assign all the blocks that has 'item' class as an isotope
 		        container.isotope({
-		            itemSelector: '.item',
-		            masonry: {
-		                columnWidth: 120,
-		                gutterWidth: 20,
-		                cornerStampSelector: '.corner-stamp'
-		            },
+		            itemSelector: '.item',	
+		            animationEngine : 'css',	           
 		            getSortData: {
 		                name: function ($elem) {
 		                    return $elem.find('.title')[0].innerText;
 		                }
 		            }
-		        });
+		        });		        
 		    });
 
 		    //And sort by name 
@@ -172,16 +168,16 @@ if (Meteor.isClient) {
 		    return false;
 		},
 		//checkes if the block rendered has a tweet
-			IsTweet: function(type, url){
-				if(type == 'tweet'&& url != undefined && url != '')
-					return true;
-				else
-					return false;
-			},
+		IsTweet: function(type, url){
+			if(type == 'tweet'&& url != undefined && url != '')
+				return true;
+			else
+				return false;
+		},
 		//Loads the tweet and injects the twitter html reponse
-			LoadTweet: function(url){
-				checkTwitter(this.img,this._id);		
-			},
+		LoadTweet: function(url){
+			checkTwitter(this.img,this._id);		
+		},
 		//Gets all the tags assigned to a block
 		Tags: function(url){
 		  var tags = [];
@@ -324,7 +320,7 @@ function checkTwitter(url, id){
           $("#" + id + " #tweet").html($html);
           setTimeout( function() {
             container.isotope('reloadItems').isotope(); 
-          }, 10000 );    
+          }, 3000 );    
         }
         else
         {

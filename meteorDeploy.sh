@@ -18,10 +18,6 @@ export MongoDBName=coverage
 
 cd ~/meteor/$APPNAME/
 
-echo Stopping forever...
-
-forever stop ~/meteor/$APPNAME/Deploy/bundle/main.js
-
 echo Deleting deploy folder...
 
 rm -rf ~/meteor/$APPNAME/Deploy
@@ -44,5 +40,11 @@ npm install --prefix ./Deploy/bundle/server/ fibers@1.0.0
 export MONGO_URL=mongodb://localhost/$MongoDBName
 export ROOT_URL=http://$APP_HOST:$PORT
 
-echo Starting forever...
-forever start ~/meteor/$APPNAME/Deploy/bundle/main.js
+if [[ $(forever list) =~ "coverage" ]]; then
+        echo Retarting forever...
+		forever restart ~/meteor/$APPNAME/Deploy/bundle/main.js
+else
+        echo Starting forever...
+		forever start ~/meteor/$APPNAME/Deploy/bundle/main.js
+fi
+
